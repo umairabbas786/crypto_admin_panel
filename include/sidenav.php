@@ -75,7 +75,7 @@
 
 					<!-- activity_logs -->
 					<li>
-						<a href="#"><i class="fa fa-eye"></i><span>Activity Logs</span></a>
+						<a href="activity.php"><i class="fa fa-eye"></i><span>Activity Logs</span></a>
 					</li>
 
 					<!--verifications-->

@@ -90,10 +90,8 @@ if(Sessionset('admin') == false){
 							</div>
 						</div>
 					</div>
-
 					<div class="row">
 						<div class="col-md-8">
-
 							<div class="box box-info">
 								<div class="box-header text-center">
 									<h4 class="text-info text-justify"><b>Latest Ticket</b></h4>

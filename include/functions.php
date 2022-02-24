@@ -190,6 +190,22 @@
         $total_price=$total_sum-$withdraw_price;
         return $total_price;
     }
+    function GetUserActivity($conn){
+        $sql = "select * from activity_log";
+        $r = $conn->query($sql);
+        $rows = array();
+        while($row = mysqli_fetch_array($r)){
+            $row['user'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['user'],$conn).'>'.$row['user'].'</a>';
+            $data[] = array(
+                "id" => $row['id'],
+                "date" => $row['date'],
+                "user" => $row['user'],
+                "ip" => $row['ip_address'],
+                "browser" => $row['browser']
+              );
+        }
+        echo json_encode($data);
+    }
     function GetUserDetails($conn){
         $sql = "select * from user";
         $r = $conn->query($sql);
