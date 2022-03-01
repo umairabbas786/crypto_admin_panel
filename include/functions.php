@@ -260,6 +260,16 @@
             return false;
         }
     }
+    function UserTicketCheck($email,$conn){
+        $sql = "select * from ticket where owner='$email'";
+        $r = $conn->query($sql);
+        if(mysqli_num_rows($r) >= 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function AddressCheck($conn){
         $sql = "select * from address_kyc";
         $r = $conn->query($sql);
@@ -815,6 +825,39 @@
     }
     function GetAllTickets($conn){
         $sql = "select * from ticket";
+        $r = $conn->query($sql);
+        $rows = array();
+        while($row = mysqli_fetch_array($r)){
+            $updateButton = "<a class='btn btn-xs btn-primary' href='ticketreply.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-send'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='ticket.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $action = $updateButton.' '.$deleteButton;
+            if($row['status'] == '1'){
+                $row['status'] = '<span class="label label-success">Open</span>';
+            }
+            if($row['status'] == '0'){
+                $row['status'] = '<span class="label label-danger">Closed</span>';
+            }
+            if($row['status'] == '-1'){
+                $row['status'] = '<span class="label label-primary">In Progress</span>';
+            }
+            if($row['status'] == '-2'){
+                $row['status'] = '<span class="label label-warning">Hold</span>';
+            }
+            $row['owner'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['owner'],$conn).'>'.$row['owner'].'</a>';
+            $data[] = array(
+                "id" => $row['id'],
+                "date" => $row['date'],
+                "user" => $row['owner'],
+                "subject" => $row['subject'],
+                "status" => $row['status'],
+                "priority" => $row['type'],
+                "action" => $action
+              );
+        }
+        echo json_encode($data);
+    }
+    function GetUserTickets($email,$conn){
+        $sql = "select * from ticket where owner = '$email'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){

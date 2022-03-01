@@ -138,5 +138,5 @@ if(Sessionset('admin') == false){
         <?php include "include/footer.php";?>
         <div class="control-sidebar-bg"></div>
     </div>
-    
     <?php include "include/script.php";?>
+    
