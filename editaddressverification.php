@@ -139,7 +139,7 @@ if(CheckGet('id') == false){
                                                                 </h4>
                                                                 <li> <?php echo $row['front_pass'];?>
                                                                     <a class="text-info pull-right"
-                                                                        href="../user/assets/kyc/<?php echo $row['front_pass']?>">
+                                                                        href="../user/assets/kyc/<?php echo $row['front_pass']?>" target="_blank">
                                                                         <i class="fa fa-download"></i>
                                                                     </a>
                                                                 </li>
@@ -148,7 +148,7 @@ if(CheckGet('id') == false){
                                                                 </h4>
                                                                 <li> <?php echo $row['back_pass'];?>
                                                                     <a class="text-info pull-right"
-                                                                        href="../user/assets/kyc/<?php echo $row['back_pass']?>">
+                                                                        href="../user/assets/kyc/<?php echo $row['back_pass']?>" target="_blank">
                                                                         <i class="fa fa-download"></i>
                                                                     </a>
                                                                 </li>

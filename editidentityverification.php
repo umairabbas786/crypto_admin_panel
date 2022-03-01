@@ -33,7 +33,7 @@ if(CheckGet('id') == false){
                     <div class="box-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <div class="top-bar-title padding-bottom pull-left">Address Verification Details</div>
+                                <div class="top-bar-title padding-bottom pull-left">Identity Verification Details</div>
                             </div>
 
                             <div>
@@ -152,7 +152,7 @@ if(CheckGet('id') == false){
                                                                 </h4>
                                                                 <li> <?php echo $row['document'];?>
                                                                     <a class="text-info pull-right"
-                                                                        href="#">
+                                                                        href="../user/assets/kyc/<?php echo $row['document'];?>" target="_blank">
                                                                         <i class="fa fa-download"></i>
                                                                     </a>
                                                                 </li>
@@ -160,7 +160,7 @@ if(CheckGet('id') == false){
                                                                 </h4>
                                                                 <li> <?php echo $row['bank'];?>
                                                                     <a class="text-info pull-right"
-                                                                        href="#">
+                                                                        href="../user/assets/kyc/<?php echo $row['bank'];?>" target="_blank">
                                                                         <i class="fa fa-download"></i>
                                                                     </a>
                                                                 </li>
@@ -168,7 +168,7 @@ if(CheckGet('id') == false){
                                                                 </h4>
                                                                 <li> <?php echo $row['cnic'];?>
                                                                     <a class="text-info pull-right"
-                                                                        href="#">
+                                                                        href="../user/assets/kyc/<?php echo $row['cnic'];?>" target="_blank">
                                                                         <i class="fa fa-download"></i>
                                                                     </a>
                                                                 </li>

@@ -72,7 +72,7 @@ if(Sessionset('admin') == false){
 
                 <div class="row">
                     <div class="col-md-8">
-                        <h3 class="panel-title text-bold ml-5">All Address Verifications</h3>
+                        <h3 class="panel-title text-bold ml-5">All Identity Verifications</h3>
                     </div>
                     <!-- <div class="col-md-4">
                         <div class="btn-group pull-right">
