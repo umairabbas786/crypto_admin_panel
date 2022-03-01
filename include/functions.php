@@ -132,8 +132,8 @@
         $row = mysqli_fetch_assoc($r);
         return $row;
     }
-    function UpdateUser($id,$username,$phone,$email,$pass,$status,$conn){
-        $sql = "update user set username = '$username' , phone = '$phone' , email = '$email' , password = '$pass' , block_status = '$status' where id = '$id'";
+    function UpdateUser($id,$username,$phone,$email,$email_verify,$pass,$status,$conn){
+        $sql = "update user set username = '$username' , phone = '$phone' , email = '$email' , password = '$pass', email_verification = '$email_verify' , block_status = '$status' where id = '$id'";
         $r = $conn->query($sql);
         if($r){
             return true;
@@ -225,6 +225,9 @@
             }
             if($row['block_status'] == '0'){
                 $row['block_status'] = '<span class="label label-danger">Unblocked</span>';
+            }
+            if($row['block_status'] == '-1'){
+                $row['block_status'] = '<span class="label label-primary">Suspended</span>';
             }
             if(GetUserBalance($row['email'],$conn) < 1){
                 $row['account_number'] = '$0.00';

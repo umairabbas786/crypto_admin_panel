@@ -9,7 +9,7 @@ if(CheckGet('id') == false){
 ?>
 <?php 
     if(isset($_POST['update'])){
-        if(UpdateUser($_GET['id'],$_POST['username'],$_POST['phone'],$_POST['email'],$_POST['password'],$_POST['status'],$conn)){
+        if(UpdateUser($_GET['id'],$_POST['username'],$_POST['phone'],$_POST['email'],$_POST['email_verify'],$_POST['password'],$_POST['status'],$conn)){
             $_SESSION['success'] = "User Updated Successfully";
             header("location:user.php");
         }
@@ -167,6 +167,22 @@ if(CheckGet('id') == false){
                                                                 id="password_confirmation">
                                                         </div>
                                                     </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label required"
+                                                            for="status">Email Verification</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="select2" name="email_verify" id="status">
+                                                                <option value='1'
+                                                                    <?php if($row['email_verification'] == 1){echo 'selected';}?>>
+                                                                    Active</option>
+                                                                <option value='0'
+                                                                    <?php if($row['email_verification'] == 0){echo 'selected';}?>>
+                                                                    Inactive</option>
+                                                            </select>
+                                                            <label id="user-status" class="error" for="status"></label>
+                                                        </div>
+                                                    </div>
 
                                                     <!-- Status -->
                                                     <div class="form-group">
@@ -180,6 +196,9 @@ if(CheckGet('id') == false){
                                                                 <option value='1'
                                                                     <?php if($row['block_status'] == 1){echo 'selected';}?>>
                                                                     Inactive</option>
+                                                                    <option value='-1'
+                                                                    <?php if($row['block_status'] == -1){echo 'selected';}?>>
+                                                                    Suspend</option>
                                                             </select>
                                                             <label id="user-status" class="error" for="status"></label>
                                                         </div>
