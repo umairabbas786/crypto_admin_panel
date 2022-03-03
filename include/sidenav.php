@@ -68,6 +68,10 @@
 						<a href="#"><i class="fa fa-book"></i><span>Revenues</span></a>
 					</li>
 
+					<li>
+						<a href="news.php"><i class="fa fa-info-circle"></i><span>News</span></a>
+					</li>
+
 					<!-- Tickets -->
 					<li>
 						<a href="ticket.php"><i class="fa fa-spinner"></i><span>Tickets</span></a>

@@ -172,6 +172,22 @@
             return false;
         }
     }
+    function UpdateNews($id,$text,$conn){
+        $sql = "update marquee set text = '$text' where id = '$id'";
+        $r = $conn->query($sql);
+        if($r){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    function GetNews($conn){
+        $sql = "select * from marquee";
+        $r = $conn->query($sql);
+        $row = mysqli_fetch_assoc($r);
+        return $row;
+    }
     function GetUserEmail($id,$conn){
         $sql = "select email from user where id = '$id'";
         $r = $conn->query($sql);

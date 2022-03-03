@@ -183,5 +183,6 @@ if(Sessionset('admin') == false){
 		<?php include "include/footer.php";?>
 		<div class="control-sidebar-bg"></div>
 	</div>
-
+	<?php unset($_SESSION['success_news']);?>
+	<?php unset($_SESSION['error_news']);?>
 	<?php include "include/script.php";?>
