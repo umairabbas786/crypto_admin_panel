@@ -11,6 +11,16 @@
         $row = mysqli_fetch_assoc($r);
         return $row['count(id)'];
     }
+    function AddFundToUserWallet($user,$amount,$conn){
+        $sql = "insert into deposit(price,sender,status,method) values ('$amount','$user','1','Administration')";
+        $r = $conn->query($sql);
+        if($r){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function KycRequests($conn){
         $sql = "select count(id) from kyc where status = '0'";
         $r = $conn->query($sql);

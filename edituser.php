@@ -81,11 +81,11 @@ if(CheckGet('id') == false){
                     <div class="col-md-5">
                         <div class="pull-right">
                             <a style="margin-top: 15px;"
-                                href="https://freedompayuniverse.com/admin/users/deposit/create/3136"
+                                href="funduser.php?id=<?php echo $_GET['id'];?>"
                                 class="btn btn-theme">Deposit</a>
                             &nbsp;&nbsp;&nbsp;
                             <a style="margin-top: 15px;"
-                                href="https://freedompayuniverse.com/admin/users/withdraw/create/3136"
+                                href="#"
                                 class="btn btn-theme">Payout</a>
                             &nbsp;&nbsp;&nbsp;
 
