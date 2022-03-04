@@ -244,7 +244,8 @@
 <!-- isValidPhoneNumber -->
 <script src="dist/js/isValidPhoneNumber.js" type="text/javascript"></script>
 <script src="backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-
+<!-- Lightbox -->
+<script src="dist/js/lightbox.js" type="text/javascript"></script>
 
 </body>
 

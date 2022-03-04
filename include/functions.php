@@ -222,6 +222,42 @@
         }
         echo json_encode($data);
     }
+    function GetCoolingPeriod($conn){
+        $sql = "select * from cooling_period";
+        $r = $conn->query($sql);
+        $rows = array();
+        while($row = mysqli_fetch_array($r)){
+            if($row['status'] == '1'){
+                $row['status'] = '<div class="togglebutton"><label><input type="checkbox" name="status" value="'.$row['id'].'" checked=""><span class="toggle"></span></label></div>';
+            }
+            if($row['status'] == '0'){
+                $row['status'] = '<div class="togglebutton"><label><input type="checkbox" name="statuss" value="'.$row['id'].'"><span class="toggle"></span></label></div>';
+            }
+            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $data[] = array(
+                "id" => $row['id'],
+                "email" => $row['email'],
+                "status" => $row['status'],
+              );
+        }
+        echo json_encode($data);
+    }
+    function CoolingPeriodStatus($id,$conn){
+        $sql = "select status from cooling_period where id = '$id'";
+        $r = $conn->query($sql);
+        $row = mysqli_fetch_assoc($r);
+        return $row['status'];
+    }
+    function SetCoolingPeriodStatus($id,$status,$conn){
+        $sql = "update cooling_period set status = '$status' where id = '$id'";
+        $r = $conn->query($sql);
+        if($r){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function GetUserDetails($conn){
         $sql = "select * from user";
         $r = $conn->query($sql);
@@ -237,10 +273,10 @@
                 $row['email_verification'] = '<span class="label label-danger">Unverified</span>';
             }
             if($row['block_status'] == '1'){
-                $row['block_status'] = '<span class="label label-success">Blocked</span>';
+                $row['block_status'] = '<span class="label label-danger">Blocked</span>';
             }
             if($row['block_status'] == '0'){
-                $row['block_status'] = '<span class="label label-danger">Unblocked</span>';
+                $row['block_status'] = '<span class="label label-success">Unblocked</span>';
             }
             if($row['block_status'] == '-1'){
                 $row['block_status'] = '<span class="label label-primary">Suspended</span>';
@@ -251,6 +287,7 @@
             else{
                 $row['account_number'] = "$". GetUserBalance($row['email'],$conn).".00";
             }
+            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "username" => $row['username'],

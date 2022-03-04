@@ -35,5 +35,6 @@ include "include/conn.php";
 	<script src="backend/jquery/dist/jquery.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<link rel="stylesheet" type="text/css" href="backend/bootstrap/dist/css/bootstrap.css">
+	<link href="dist/css/lightbox.css" rel="stylesheet">
 
 </head>

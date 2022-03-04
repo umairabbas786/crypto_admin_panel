@@ -63,9 +63,9 @@
 						</ul>
 					</li>
 
-					<!-- revenues -->
+					<!-- Cooling Period -->
 					<li>
-						<a href="#"><i class="fa fa-book"></i><span>Revenues</span></a>
+						<a href="coolingperiod.php"><i class="fa fa-book"></i><span>Cooling Period</span></a>
 					</li>
 
 					<li>
