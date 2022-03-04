@@ -12,7 +12,10 @@
         return $row['count(id)'];
     }
     function AddFundToUserWallet($user,$amount,$conn){
+        $transection_id = mt_rand(10000,99999);
         $sql = "insert into deposit(price,sender,status,method) values ('$amount','$user','1','Administration')";
+        $sql2 = "insert into transection (price,sender,method,status,date,description,transection_id) VALUES ('$amount','$user','Administration','1',now(),'Administration Credit','$transection_id')";
+        $r2 = $conn->query($sql2);
         $r = $conn->query($sql);
         if($r){
             return true;
