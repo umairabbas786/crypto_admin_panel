@@ -1,4 +1,30 @@
 <?php
+    function DeleteUser($email,$conn)
+    {
+        $sql1 = "delete from user where email = '$email'";
+        $sql2 = "delete from withdraw where sender = '$email'";
+        $sql3 = "delete from transection where sender = '$email'";
+        $sql4 = "delete from ticket where owner = '$email'";
+        $sql5 = "delete from ticket_chat where sender = '$email'";
+        $sql6 = "delete from payout where email = '$email'";
+        $sql7 = "delete from cooling_period where email = '$email'";
+        $sql8 = "delete from kyc where email = '$email'";
+        $sql9 = "delete from deposit where sender = '$email'";
+        $sql10 = "delete from address_kyc where email = '$email'";
+        $sql11 = "delete from activity_log where user = '$email'";
+        $conn->query($sql2);$conn->query($sql3);
+        $conn->query($sql4);$conn->query($sql5);
+        $conn->query($sql6);$conn->query($sql7);
+        $conn->query($sql8);$conn->query($sql9);
+        $conn->query($sql10);$conn->query($sql11);
+        $r = $conn->query($sql1);
+        if($r){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function ValidateLogin($email,$password,$conn)
     {
         $sql = "select * from admin where email = '$email' and password = '$password'";
@@ -277,7 +303,7 @@
         $rows = array();
         while($row = mysqli_fetch_array($r)){
             $updateButton = "<a class='btn btn-xs btn-primary' href='edituser.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $deleteButton = "<a class='btn btn-xs btn-danger' href='user.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='user.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $updateButton." ".$deleteButton;
             if($row['email_verification'] == '1'){
                 $row['email_verification'] = '<span class="label label-success">Verified</span>';

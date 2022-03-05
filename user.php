@@ -4,6 +4,20 @@ if(Sessionset('admin') == false){
 	header("location:login.php");
 }
 ?>
+<?php 
+    if(isset($_GET['id'])){
+        $row = GetUserWithId($_GET['id'],$conn);
+        if(DeleteUser($row['email'],$conn)){
+            $_SESSION['success'] = "User Deleted SuccessFully";
+            header("location:user.php");
+        }
+        else{
+            $_SESSION['error'] = "Unable to Delete User";
+            header("location:user.php");
+        }
+    }
+
+?>
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper_custom">
@@ -138,5 +152,13 @@ if(Sessionset('admin') == false){
         <?php include "include/footer.php";?>
         <div class="control-sidebar-bg"></div>
     </div>
+    <script>
+        function confirmationDelete(anchor)
+        {
+            var conf = confirm('Delete this User?');
+            if(conf)
+            window.location=anchor.attr("href");
+        }
+    </script>
     <?php include "include/script.php";?>
     

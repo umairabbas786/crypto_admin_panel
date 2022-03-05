@@ -58,7 +58,7 @@ if(Sessionset('admin') == false){
                                         </div>
                                         <div>
                                             <div class="input-group" style="margin-top: 25px;">
-                                                <button type="submit" name="btn" class="btn btn-theme"
+                                                <button type="submit" class="btn btn-theme"
                                                     id="btn">Filter</button>
                                             </div>
                                         </div>
