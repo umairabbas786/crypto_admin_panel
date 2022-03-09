@@ -12,25 +12,41 @@ if(CheckGet('id') == false){
 if (isset($_POST['transaction'])) {
     $status = $_POST['status'];
     $Approve = $row['approve_id'];
-    if($row['method'] == 'Withdraw'){
-        $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
-        $conn->query($mysqli);
-    }
-    if($row['method'] == 'Sender'){
-        $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
-        $conn->query($mysqli);
-    }
-    if($row['method'] == 'Reciever'){
-        $mysqli="UPDATE  deposit SET status='$status' WHERE id='$Approve'";
-        $conn->query($mysqli);
-    }
-    $update = "UPDATE transection  SET status='$status' WHERE approve_id='$Approve'";
-    if ($conn->query($update)){
-        $_SESSION['transaction_success'] = "Transaction Updated Successfully!";
-        header("location:transaction.php");
-    }
-    else{
-        $_SESSION['transaction_error'] = "Unable to Update Transaction";
+    if($status == "delete"){
+        $sql = "delete from withdraw where id = '$Approve'";
+        $conn->query($sql);
+        $sql1 = "delete from deposit where id = '$Approve'";
+        $conn->query($sql1);
+        $sql2 = "delete from transection where approve_id = '$Approve'";
+        $a3 = $conn->query($sql2);
+        if($a3){
+            $_SESSION['transaction_success'] = "Transaction Deleted Successfully!";
+            header("location:transaction.php");
+        }
+        else{
+            $_SESSION['transaction_error'] = "Unable to Update Transaction";
+        }
+    }else{
+        if($row['method'] == 'Withdraw'){
+            $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
+            $conn->query($mysqli);
+        }
+        if($row['method'] == 'Sender'){
+            $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
+            $conn->query($mysqli);
+        }
+        if($row['method'] == 'Reciever'){
+            $mysqli="UPDATE  deposit SET status='$status' WHERE id='$Approve'";
+            $conn->query($mysqli);
+        }
+        $update = "UPDATE transection  SET status='$status' WHERE approve_id='$Approve'";
+        if ($conn->query($update)){
+            $_SESSION['transaction_success'] = "Transaction Updated Successfully!";
+            header("location:transaction.php");
+        }
+        else{
+            $_SESSION['transaction_error'] = "Unable to Update Transaction";
+        }
     }
 }
 ?>
@@ -130,6 +146,7 @@ if (isset($_POST['transaction'])) {
                                                                 <option value="1" <?php if($row['status'] == '1'){echo "selected";}?>>Success</option>
                                                                 <option value="0" <?php if($row['status'] == '0'){echo "selected";}?>>Pending</option>
                                                                 <option value="-1" <?php if($row['status'] == '-1'){echo "selected";}?>>Cancel</option>
+                                                                <option value="delete">Delete</option>
                                                             </select>
                                                         </div>
                                                     </div>

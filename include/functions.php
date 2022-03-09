@@ -12,11 +12,13 @@
         $sql9 = "delete from deposit where sender = '$email'";
         $sql10 = "delete from address_kyc where email = '$email'";
         $sql11 = "delete from activity_log where user = '$email'";
+        $sql12 = "delete from wallet_history where sender = '$email' or receiver = '$email'";
         $conn->query($sql2);$conn->query($sql3);
         $conn->query($sql4);$conn->query($sql5);
         $conn->query($sql6);$conn->query($sql7);
         $conn->query($sql8);$conn->query($sql9);
         $conn->query($sql10);$conn->query($sql11);
+        $conn->query($sql12);
         $r = $conn->query($sql1);
         if($r){
             return true;

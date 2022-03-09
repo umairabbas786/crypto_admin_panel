@@ -16,9 +16,7 @@ if(Sessionset('admin') == false){
             header("location:user.php");
         }
     }
-
 ?>
-
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper_custom">
         <?php include "include/nav.php";?>
