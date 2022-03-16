@@ -609,7 +609,7 @@
         return $row;
     }
     function GetAllDeposit($conn){
-        $sql = "select * from deposit";
+        $sql = "select * from deposit where method !='transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -639,7 +639,7 @@
         echo json_encode($data);
     }
     function GetPendingDeposit($conn){
-        $sql = "select * from deposit where status = '0'";
+        $sql = "select * from deposit where status = '0' and method !='transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -669,7 +669,7 @@
         echo json_encode($data);
     }
     function GetSuccessDeposit($conn){
-        $sql = "select * from deposit where status = '1'";
+        $sql = "select * from deposit where status = '1' and method !='transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -699,7 +699,7 @@
         echo json_encode($data);
     }
     function GetCancelledDeposit($conn){
-        $sql = "select * from deposit where status = '-1'";
+        $sql = "select * from deposit where status = '-1' and method !='transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -729,7 +729,7 @@
         echo json_encode($data);
     }
     function GetAllWithdraw($conn){
-        $sql = "select * from withdraw";
+        $sql = "select * from withdraw where method != 'wallet transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -748,12 +748,12 @@
             $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $rrr = GetPayoutWithId($row['details'],$conn);
             if(empty($rrr['type'])){
-                $type = '';
+                $type = $row['method'];
             }else{
                 $type = $rrr['type'];
             }
             if(empty($rrr['details'])){
-                $detail = '';
+                $detail = $row['details'];
             }else{
                 $detail = $rrr['details'];
             }
@@ -771,7 +771,7 @@
         echo json_encode($data);
     }
     function GetPendingWithdraw($conn){
-        $sql = "select * from withdraw where status = '0'";
+        $sql = "select * from withdraw where status = '0' and method != 'wallet transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -813,7 +813,7 @@
         echo json_encode($data);
     }
     function GetSuccessWithdraw($conn){
-        $sql = "select * from withdraw where status = '1'";
+        $sql = "select * from withdraw where status = '1' and method != 'wallet transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -855,7 +855,7 @@
         echo json_encode($data);
     }
     function GetCancelledWithdraw($conn){
-        $sql = "select * from withdraw where status = '-1'";
+        $sql = "select * from withdraw where status = '-1' and method != 'wallet transfer'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
