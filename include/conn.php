@@ -1,5 +1,5 @@
 <?php 
 
-$conn = new mysqli("localhost","root","","globtqsc_newglobal");
+$conn = new mysqli("localhost","root","","swift");
 
 ?>

@@ -62,17 +62,10 @@
         return $row['count(id)'] + $row1['count(id)'];
     }
     function GetUsersBalance($conn){
-        $sql="SELECT sum(price) from withdraw where status='0' || status='1'";
+        $sql="SELECT sum(balance) from user";
         $result=$conn->query($sql);
         $row= mysqli_fetch_assoc($result);
-        $withdraw_price=$row['sum(price)'];
-
-        $sql1="SELECT sum(price) from deposit WHERE status='1'";
-        $result1=$conn->query($sql1);
-        $row1= mysqli_fetch_assoc($result1);
-        $total_sum=$row1['sum(price)'];
-        $total_price=$total_sum-$withdraw_price;
-        return $total_price;
+        return $row['sum(balance)'];
     }
     function AdminStatusCheck($email,$conn){
         $sql = "select status from admin where email = '$email'";
@@ -322,11 +315,11 @@
             if($row['block_status'] == '-1'){
                 $row['block_status'] = '<span class="label label-primary">Suspended</span>';
             }
-            if(GetUserBalance($row['email'],$conn) < 1){
-                $row['account_number'] = '$0.00';
+            if($row['balance'] < 1){
+                $row['balance'] = '$0.00';
             }
             else{
-                $row['account_number'] = "$". GetUserBalance($row['email'],$conn).".00";
+                $row['balance'] = "$". $row['balance'];
             }
             $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
@@ -334,7 +327,7 @@
                 "username" => $row['username'],
                 "email" => $row['email'],
                 "phone" => $row['phone'],
-                "balance" => $row['account_number'],
+                "balance" => $row['balance'],
                 "account_type" => $row['account_type'],
                 "password" => $row['password'],
                 "email_verification" => $row['email_verification'],
