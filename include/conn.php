@@ -1,5 +1,6 @@
 <?php 
-
-$conn = new mysqli("localhost","root","","swift");
-
+ $conn = mysqli_connect("localhost",'root','','swift');
+if(!$conn){
+   echo "no pass";
+} 
 ?>
