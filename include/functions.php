@@ -41,6 +41,10 @@
     }
     function AddFundToUserWallet($user,$amount,$conn){
         $transection_id = mt_rand(10000,99999);
+        $bal = GetUserBalance($user,$conn);
+        $newbal = $bal + $amount;
+        $sql1 = "update user set balance = '$newbal' where email = '$user'";
+        $conn->query($sql1);
         $sql = "insert into deposit(price,sender,status,method) values ('$amount','$user','1','Administration')";
         $sql2 = "insert into transection (price,sender,method,status,date,description,transection_id) VALUES ('$amount','$user','Administration','1',now(),'Administration Credit','$transection_id')";
         $r2 = $conn->query($sql2);
@@ -229,16 +233,10 @@
         return $row['email'];
     }
     function GetUserBalance($email,$conn){  
-        $sql1="SELECT sum(price) FROM withdraw WHERE sender='$email' && status='0' || sender='$email' && status='1'";
-        $result=$conn->query($sql1);
+        $sql="SELECT balance from user where email = '$email'";
+        $result=$conn->query($sql);
         $row= mysqli_fetch_assoc($result);
-        $withdraw_price=$row['sum(price)'];
-        $sql1="SELECT sum(price) FROM deposit WHERE sender='$email' && status='1'";
-        $result1=$conn->query($sql1);
-        $row1= mysqli_fetch_assoc($result1);
-        $total_sum=$row1['sum(price)'];
-        $total_price=$total_sum-$withdraw_price;
-        return $total_price;
+        return $row['balance'];
     }
     function GetUserActivity($conn){
         $sql = "select * from activity_log";
@@ -401,6 +399,9 @@
             if($row['method'] == 'Reciever'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
+            if($row['method'] == 'Administration'){
+                $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
+            }
             $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
@@ -441,6 +442,9 @@
                 $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
             }
             if($row['method'] == 'Reciever'){
+                $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
+            }
+            if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
             $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
@@ -485,6 +489,9 @@
             if($row['method'] == 'Reciever'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
+            if($row['method'] == 'Administration'){
+                $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
+            }
             $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
@@ -527,6 +534,9 @@
             if($row['method'] == 'Reciever'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
+            if($row['method'] == 'Administration'){
+                $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
+            }
             $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
@@ -567,6 +577,9 @@
                 $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
             }
             if($row['method'] == 'Reciever'){
+                $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
+            }
+            if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
             $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
