@@ -1,7 +1,7 @@
 <?php include "include/header.php";include "include/functions.php"?>
 <?php 
 if(Sessionset('admin') == false){
-	header("location:login.php");
+	header("location:?a=login");
 }
 ?>
 <?php 

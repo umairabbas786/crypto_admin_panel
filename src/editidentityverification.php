@@ -1,17 +1,17 @@
 <?php include "include/header.php";include "include/functions.php"?>
 <?php 
 if(Sessionset('admin') == false){
-	header("location:login.php");
+	header("location:?a=login");
 }
 if(CheckGet('id') == false){
-    header("location:404.php");
+    header("location:?a=404");
 }
 ?>
 <?php 
     if(isset($_POST['update'])){
         if(UpdateIdentityProof($_GET['id'],$_POST['status'],$conn)){
             $_SESSION['identity_success'] = "Identity Status Updated Successfully";
-            header("location:identity_verification.php");
+            header("location:?a=identity-kyc");
         }
         else{
             $_SESSION['identity_error'] = "Unable to Update Identity Status";
@@ -113,7 +113,7 @@ if(CheckGet('id') == false){
                                                                             <div class="col-md-3"></div>
                                                                             <div class="col-md-2"><a id="cancel_anchor"
                                                                                     class="btn btn-theme-danger pull-left"
-                                                                                    href="identity_verification.php">Cancel</a>
+                                                                                    href="?a=identity-kyc">Cancel</a>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <button type="submit"

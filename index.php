@@ -46,7 +46,15 @@ if (!isset($_GET['a'])) {
         include "./src/editadmin.php";
     } elseif ($_GET['a'] === 'add-admin'){
         include "./src/addadmin.php";
-    }
+    } elseif ($_GET['a'] === 'edit-identity-kyc'){
+        include "./src/editidentityverification.php";
+    } elseif ($_GET['a'] === 'edit-address-kyc'){
+        include "./src/editaddressverification.php";
+    } elseif ($_GET['a'] === 'login'){
+        include "./src/login.php";
+    } elseif ($_GET['a'] === '404'){
+        include "./src/404.php";
+    } 
     
     
     

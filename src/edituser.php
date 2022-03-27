@@ -1,10 +1,10 @@
 <?php include "include/header.php";include "include/functions.php"?>
 <?php 
 if(Sessionset('admin') == false){
-	header("location:login.php");
+	header("location:?a=login");
 }
 if(CheckGet('id') == false){
-    header("location:404.php");
+    header("location:?a=404");
 }
 ?>
 <?php 

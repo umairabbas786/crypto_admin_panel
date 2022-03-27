@@ -1,18 +1,18 @@
 <?php include "include/header.php";include "include/functions.php"?>
 <?php 
 if(Sessionset('admin') == false){
-	header("location:login.php");
+	header("location:?a=login");
 }
 ?>
 <?php 
     if(isset($_POST['update_news'])){
         if(UpdateNews($_POST['id'],$_POST['news'],$conn)){
             $_SESSION['success_news'] = "News Updated Successfully";
-            header("location:news.php");
+            header("location:?a=news");
         }
         else{
             $_SESSION['error_news'] = "Unable to Update News";
-            header("location:news.php");
+            header("location:?a=news");
         }
     }
 ?>

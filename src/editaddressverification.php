@@ -1,17 +1,17 @@
 <?php include "include/header.php";include "include/functions.php"?>
 <?php 
 if(Sessionset('admin') == false){
-	header("location:login.php");
+	header("location:?a=login");
 }
 if(CheckGet('id') == false){
-    header("location:404.php");
+    header("location:?a=404");
 }
 ?>
 <?php 
     if(isset($_POST['update'])){
         if(UpdateAddressProof($_GET['id'],$_POST['status'],$conn)){
             $_SESSION['address_success'] = "Address Status Updated Successfully";
-            header("location:address_verification.php");
+            header("location:?a=address-kyc");
         }
         else{
             $_SESSION['address_error'] = "Unable to Update Address Status";
@@ -103,7 +103,7 @@ if(CheckGet('id') == false){
                                                                             <div class="col-md-3"></div>
                                                                             <div class="col-md-2"><a id="cancel_anchor"
                                                                                     class="btn btn-theme-danger pull-left"
-                                                                                    href="address_verification.php">Cancel</a>
+                                                                                    href="?a=address-kyc">Cancel</a>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <button type="submit"

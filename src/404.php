@@ -19,7 +19,7 @@
         <div style="color:#F5F5F5;">
             Sorry, but the page you are looking for might have been removed, or unavailable.
         </div>
-        <a href="index.php">Back To Home Page</a>
+        <a href="?a=home">Back To Home Page</a>
     </div>
 </body>
 

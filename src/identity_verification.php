@@ -1,7 +1,7 @@
 <?php include "include/header.php";include "include/functions.php"?>
 <?php 
 if(Sessionset('admin') == false){
-	header("location:login.php");
+	header("location:?a=login");
 }
 ?>
 
@@ -34,7 +34,7 @@ if(Sessionset('admin') == false){
             <section class="content">
                 <div class="box">
                     <div class="box-body pb-20">
-                        <form class="form-horizontal" action="identity_verification.php"
+                        <form class="form-horizontal" action="?a=identity-kyc&&"
                             method="GET">
                             <div class="row">
                                 <div class="col-md-12">
