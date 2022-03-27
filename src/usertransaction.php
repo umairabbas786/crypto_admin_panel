@@ -11,7 +11,7 @@ if(CheckGet('id') == false){
     if(isset($_POST['update'])){
         if(UpdateUser($_GET['id'],$_POST['username'],$_POST['phone'],$_POST['email'],$_POST['password'],$_POST['status'],$conn)){
             $_SESSION['success'] = "1";
-            header("location:user.php");
+            header("location:?a=user");
         }
         else{
             $_SESSION['error'] = "0";
@@ -49,16 +49,16 @@ if(CheckGet('id') == false){
                     <div class="panel-body ml-20">
                         <ul class="nav nav-tabs cus" role="tablist">
                             <li>
-                                <a href='edituser.php?id=<?php echo $_GET['id'];?>'>Profile</a>
+                                <a href='?a=edit-user&id=<?php echo $_GET['id'];?>'>Profile</a>
                             </li>
                             <li class="active">
-                                <a href="usertransaction.php?id=<?php echo $_GET['id'];?>">Transactions</a>
+                                <a href="?a=user-transaction&id=<?php echo $_GET['id'];?>">Transactions</a>
                             </li>
                             <li>
-                                <a href="userwallet.php?id=<?php echo $_GET['id'];?>">Wallets</a>
+                                <a href="?a=user-wallet&id=<?php echo $_GET['id'];?>">Wallets</a>
                             </li>
                             <li>
-                                <a href="userticket.php?id=<?php echo $_GET['id'];?>">Tickets</a>
+                                <a href="?a=user-ticket&id=<?php echo $_GET['id'];?>">Tickets</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>

@@ -11,7 +11,7 @@ if(CheckGet('id') == false){
     if(isset($_POST['update'])){
         if(UpdateUser($_GET['id'],$_POST['username'],$_POST['phone'],$_POST['email'],$_POST['email_verify'],$_POST['password'],$_POST['status'],$conn)){
             $_SESSION['success'] = "User Updated Successfully";
-            header("location:user.php");
+            header("location:?a=user");
         }
         else{
             $_SESSION['error'] = "Unable to Update User";
@@ -50,16 +50,16 @@ if(CheckGet('id') == false){
                     <div class="panel-body ml-20">
                         <ul class="nav nav-tabs cus" role="tablist">
                             <li class="active">
-                                <a href='edituser.php?id=<?php echo $_GET['id'];?>'>Profile</a>
+                                <a href='?a=edit-user&id=<?php echo $_GET['id'];?>'>Profile</a>
                             </li>
                             <li>
-                                <a href="usertransaction.php?id=<?php echo $_GET['id'];?>">Transactions</a>
+                                <a href="?a=user-transaction&id=<?php echo $_GET['id'];?>">Transactions</a>
                             </li>
                             <li>
-                                <a href="userwallet.php?id=<?php echo $_GET['id'];?>">Wallets</a>
+                                <a href="?a=user-wallet&id=<?php echo $_GET['id'];?>">Wallets</a>
                             </li>
                             <li>
-                                <a href="userticket.php?id=<?php echo $_GET['id'];?>">Tickets</a>
+                                <a href="?a=user-ticket&id=<?php echo $_GET['id'];?>">Tickets</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -81,7 +81,7 @@ if(CheckGet('id') == false){
                     <div class="col-md-5">
                         <div class="pull-right">
                             <a style="margin-top: 15px;"
-                                href="funduser.php?id=<?php echo $_GET['id'];?>"
+                                href="?a=fund-user&id=<?php echo $_GET['id'];?>"
                                 class="btn btn-theme">Deposit</a>
                             &nbsp;&nbsp;&nbsp;
                             <a style="margin-top: 15px;"
@@ -208,7 +208,7 @@ if(CheckGet('id') == false){
                                                         <label class="col-sm-4" for="inputEmail3">
                                                         </label>
                                                         <div class="col-sm-8">
-                                                            <a class="btn btn-theme-danger" href="user.php"
+                                                            <a class="btn btn-theme-danger" href="?a=user"
                                                                 id="users_cancel">
                                                                 Cancel
                                                             </a>

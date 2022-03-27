@@ -13,7 +13,7 @@ if(Sessionset('admin') == false){
         }
         else{
             $_SESSION['error'] = "Unable to Delete User";
-            header("location:user.php");
+            header("location:?a=user");
         }
     }
 ?>
@@ -53,11 +53,6 @@ if(Sessionset('admin') == false){
                             <div>
                                 <div class="top-bar-title padding-bottom pull-left">Users</div>
                             </div>
-
-                            <!-- <div>
-                                <a href="https://freedompayuniverse.com/admin/users/create" class="btn btn-theme"><span
-                                        class="fa fa-plus"> &nbsp;</span>Add User</a>
-                            </div> -->
                         </div>
                     </div>
                 </div>

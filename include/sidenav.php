@@ -3,7 +3,7 @@
 			<section class="sidebar">
 				<ul class="sidebar-menu mt-20">
 					<li class="active">
-						<a href="index.php">
+						<a href="?a=home">
 							<i class="fa fa-dashboard"></i><span>Dashboard</span>
 						</a>
 					</li>
@@ -15,12 +15,12 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="user.php">
+								<a href="?a=user">
 									<i class="fa fa-user-circle-o"></i><span>Users</span>
 								</a>
 							</li>
 							<li>
-								<a href="admin.php">
+								<a href="?a=admin">
 									<i class="fa fa-user-md"></i><span>Admins</span>
 								</a>
 							</li>
@@ -43,43 +43,43 @@
 						<ul class="treeview-menu">
 							<!-- transactions -->
 							<li>
-								<a href="transaction.php"><i class="fa fa-history"></i><span>All
+								<a href="?a=transaction"><i class="fa fa-history"></i><span>All
 										Transactions</span></a>
 							</li>
 							<!-- deposits -->
 							<li>
-								<a href="deposit.php"><i class="fa fa-arrow-down"></i><span>Deposits</span></a>
+								<a href="?a=deposit"><i class="fa fa-arrow-down"></i><span>Deposits</span></a>
 							</li>
 
 							<!-- Payouts -->
 							<li>
-								<a href="withdraw.php"><i class="fa fa-arrow-up"></i><span>Withdrawals</span></a>
+								<a href="?a=withdraw"><i class="fa fa-arrow-up"></i><span>Withdrawals</span></a>
 							</li>
 
 							<!-- transfers -->
 							<li>
-								<a href="transfers.php"><i class="fa fa-exchange"></i><span>Transfers</span></a>
+								<a href="?a=transfer"><i class="fa fa-exchange"></i><span>Transfers</span></a>
 							</li>
 						</ul>
 					</li>
 
 					<!-- Cooling Period -->
 					<li>
-						<a href="coolingperiod.php"><i class="fa fa-book"></i><span>Cooling Period</span></a>
+						<a href="?a=coolingperiod"><i class="fa fa-book"></i><span>Cooling Period</span></a>
 					</li>
 
 					<li>
-						<a href="news.php"><i class="fa fa-info-circle"></i><span>News</span></a>
+						<a href="?a=news"><i class="fa fa-info-circle"></i><span>News</span></a>
 					</li>
 
 					<!-- Tickets -->
 					<li>
-						<a href="ticket.php"><i class="fa fa-spinner"></i><span>Tickets</span></a>
+						<a href="?a=ticket"><i class="fa fa-spinner"></i><span>Tickets</span></a>
 					</li>
 
 					<!-- activity_logs -->
 					<li>
-						<a href="activity.php"><i class="fa fa-eye"></i><span>Activity Logs</span></a>
+						<a href="?a=activity"><i class="fa fa-eye"></i><span>Activity Logs</span></a>
 					</li>
 
 					<!--verifications-->
@@ -90,13 +90,13 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="identity_verification.php">
+								<a href="?a=identity-kyc">
 									<i class="fa fa-user-circle-o"></i><span>Identity Verification</span>
 								</a>
 							</li>
 
 							<li>
-								<a href="address_verification.php">
+								<a href="?a=address-kyc">
 									<i class="fa fa-address-book"></i><span>Address Verification</span>
 								</a>
 							</li>

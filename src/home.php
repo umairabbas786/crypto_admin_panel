@@ -42,7 +42,7 @@ if(Sessionset('admin') == false){
 								<div class="icon">
 									<i class="ion ion-person-add"></i>
 								</div>
-								<a href="user.php" class="small-box-footer">More info <i
+								<a href="?a=user" class="small-box-footer">More info <i
 										class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -57,7 +57,7 @@ if(Sessionset('admin') == false){
 								<div class="icon">
 									<i class="ion ion-person-add"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i
+								<a href="?a=user" class="small-box-footer">More info <i
 									class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -71,7 +71,7 @@ if(Sessionset('admin') == false){
 								<div class="icon">
 									<i class="fa fa-envelope-o"></i>
 								</div>
-								<a href="ticket.php" class="small-box-footer">More info <i
+								<a href="?a=ticket" class="small-box-footer">More info <i
 										class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -85,7 +85,7 @@ if(Sessionset('admin') == false){
 								<div class="icon">
 									<i class="ion ion-stats-bars"></i>
 								</div>
-								<a href="identity_verification.php" class="small-box-footer">More info <i
+								<a href="?a=identity-kyc" class="small-box-footer">More info <i
 										class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
@@ -114,7 +114,7 @@ if(Sessionset('admin') == false){
 													while($row = mysqli_fetch_assoc($r)){
 												?>
 												<tr class="text-left">
-													<td style="width: 35%;"><a href='ticketreply.php?id=<?php echo $row['id'];?>'><?php echo $row['subject'];?></a></td>
+													<td style="width: 35%;"><a href='?a=ticket-reply&id=<?php echo $row['id'];?>'><?php echo $row['subject'];?></a></td>
 													<td style="width: 20%;"><?php echo $row['owner']?></td>
 													<td style="width: 10%;"><?php echo $row['type']?></td>
 													<td style="width: 20%;"><?php echo $row['date']?></td>

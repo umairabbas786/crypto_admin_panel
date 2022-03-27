@@ -301,8 +301,8 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='edituser.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='user.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-user&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='?a=user&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $updateButton." ".$deleteButton;
             if($row['email_verification'] == '1'){
                 $row['email_verification'] = '<span class="label label-success">Verified</span>';
@@ -325,7 +325,7 @@
             else{
                 $row['balance'] = "$". $row['balance'];
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "username" => $row['username'],

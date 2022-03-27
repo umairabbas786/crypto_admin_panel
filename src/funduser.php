@@ -12,7 +12,7 @@ if(CheckGet('id') == false){
     if(isset($_POST['funduser'])){
         if(AddFundToUserWallet($row['email'],$_POST['amount'],$conn)){
             $_SESSION['success'] = "User Funded Successfully";
-            header("location:user.php");
+            header("location:?a=user");
         }
         else{
             $_SESSION['error'] = "Unable to Fund User";
@@ -44,16 +44,16 @@ if(CheckGet('id') == false){
                     <div class="panel-body">
                         <ul class="nav nav-tabs cus" role="tablist">
                             <li class="active">
-                                <a href='edituser.php?id=<?php echo $_GET['id'];?>'>Profile</a>
+                                <a href='?a=edit-user&id=<?php echo $_GET['id'];?>'>Profile</a>
                             </li>
                             <li>
-                                <a href="usertransaction.php?id=<?php echo $_GET['id'];?>">Transactions</a>
+                                <a href="?a=user-transaction&id=<?php echo $_GET['id'];?>">Transactions</a>
                             </li>
                             <li>
-                                <a href="userwallet.php?id=<?php echo $_GET['id'];?>">Wallets</a>
+                                <a href="?a=user-wallet&id=<?php echo $_GET['id'];?>">Wallets</a>
                             </li>
                             <li>
-                                <a href="userticket.php?id=<?php echo $_GET['id'];?>">Tickets</a>
+                                <a href="?a=user-ticket&id=<?php echo $_GET['id'];?>">Tickets</a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -98,7 +98,7 @@ if(CheckGet('id') == false){
 
                                                 <div class="col-md-12">
                                                     <div class="col-md-5">
-                                                        <a href="edituser.php?id=<?php echo $_GET['id'];?>"
+                                                        <a href="?a=edit-user&id=<?php echo $_GET['id'];?>"
                                                             class="btn btn-theme-danger"><span><i
                                                                     class="fa fa-angle-left"></i>&nbsp;Back</span></a>
                                                         <button type="submit" name="funduser" onclick="return confirm('Are you sure you want to deposit?');" class="btn btn-theme" id="deposit-create">

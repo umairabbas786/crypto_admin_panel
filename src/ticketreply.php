@@ -17,7 +17,6 @@ if(CheckGet('id') == false){
             $_SESSION['error'] = "Unable to Update User";
         }
     }
-
 ?>
 <?php if(isset($_POST['delete'])){
     $idz = $_POST['id'];
