@@ -249,7 +249,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $row['user'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['user'],$conn).'>'.$row['user'].'</a>';
+            $row['user'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['user'],$conn).'>'.$row['user'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -271,7 +271,7 @@
             if($row['status'] == '0'){
                 $row['status'] = '<div class="togglebutton"><label><input type="checkbox" name="statuss" value="'.$row['id'].'"><span class="toggle"></span></label></div>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "email" => $row['email'],
@@ -351,6 +351,16 @@
             return false;
         }
     }
+    function UserWalletCheck($email,$conn){
+        $sql = "select * from user where email='$email'";
+        $r = $conn->query($sql);
+        if(mysqli_num_rows($r) >= 1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function UserTicketCheck($email,$conn){
         $sql = "select * from ticket where owner='$email'";
         $r = $conn->query($sql);
@@ -377,12 +387,24 @@
         $row = mysqli_fetch_assoc($r);
         return $row;
     }
+    function GetUserWalletDetails($email,$conn){
+        $sql = "select balance from user where email='$email'";
+        $r = $conn->query($sql);
+        $rows = array();
+        $row = mysqli_fetch_array($r); 
+        $data[] = array(
+            "id" => 1,
+            "balance" => "$ ".$row['balance'],
+            "currency" => "USD"
+            );
+        echo json_encode($data);
+    }
     function GetUserTransactionDetails($email,$conn){
         $sql = "select * from transection where sender='$email'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='edittransaction.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-transaction&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -408,7 +430,7 @@
             if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "transection_id" => $row['transection_id'],
@@ -453,7 +475,7 @@
             if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "transection_id" => $row['transection_id'],
@@ -498,7 +520,7 @@
             if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "transection_id" => $row['transection_id'],
@@ -543,7 +565,7 @@
             if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "transection_id" => $row['transection_id'],
@@ -588,7 +610,7 @@
             if($row['method'] == 'Administration'){
                 $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
             }
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "transection_id" => $row['transection_id'],
@@ -637,7 +659,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "user" => $row['sender'],
@@ -667,7 +689,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "user" => $row['sender'],
@@ -697,7 +719,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "user" => $row['sender'],
@@ -727,7 +749,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-success">+ $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "user" => $row['sender'],
@@ -757,7 +779,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $rrr = GetPayoutWithId($row['details'],$conn);
             if(empty($rrr['type'])){
                 $type = $row['method'];
@@ -799,7 +821,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $rrr = GetPayoutWithId($row['details'],$conn);
             if(empty($rrr['type'])){
                 $type = '';
@@ -841,7 +863,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $rrr = GetPayoutWithId($row['details'],$conn);
             if(empty($rrr['type'])){
                 $type = '';
@@ -883,7 +905,7 @@
                 $row['status'] = '<span class="label label-success">Success</span>';
             }
             $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $rrr = GetPayoutWithId($row['details'],$conn);
             if(empty($rrr['type'])){
                 $type = '';
@@ -916,7 +938,7 @@
             $deleteButton = "<a class='btn btn-xs btn-danger' href='transfers.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $deleteButton;
             $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
-            $row['sender'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
+            $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -934,7 +956,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='ticketreply.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-send'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=ticket-reply&id=".$row['id']."'' ><i class='glyphicon glyphicon-send'></i></a>";
             $deleteButton = "<a class='btn btn-xs btn-danger' href='ticket.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $updateButton.' '.$deleteButton;
             if($row['status'] == '1'){
@@ -949,7 +971,7 @@
             if($row['status'] == '-2'){
                 $row['status'] = '<span class="label label-warning">Hold</span>';
             }
-            $row['owner'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['owner'],$conn).'>'.$row['owner'].'</a>';
+            $row['owner'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['owner'],$conn).'>'.$row['owner'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -967,8 +989,8 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='ticketreply.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-send'></i></a>";
-            $deleteButton = "<a class='btn btn-xs btn-danger' href='ticket.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=ticket-reply&id=".$row['id']."'' ><i class='glyphicon glyphicon-send'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='?a=ticket&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $updateButton.' '.$deleteButton;
             if($row['status'] == '1'){
                 $row['status'] = '<span class="label label-success">Open</span>';
@@ -982,7 +1004,7 @@
             if($row['status'] == '-2'){
                 $row['status'] = '<span class="label label-warning">Hold</span>';
             }
-            $row['owner'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['owner'],$conn).'>'.$row['owner'].'</a>';
+            $row['owner'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['owner'],$conn).'>'.$row['owner'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1011,7 +1033,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1038,7 +1060,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1065,7 +1087,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1092,7 +1114,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1119,7 +1141,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1146,7 +1168,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1173,7 +1195,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],
@@ -1200,7 +1222,7 @@
             if($row['status'] == '-1'){
                 $row['status'] = '<span class="label label-danger">Rejected</span>';
             }
-            $row['email'] = '<a href=edituser.php?id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
             $data[] = array(
                 "id" => $row['id'],
                 "date" => $row['date'],

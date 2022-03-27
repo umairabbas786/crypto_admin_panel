@@ -40,7 +40,9 @@ if (!isset($_GET['a'])) {
         include "./src/userticket.php";
     } elseif ($_GET['a'] === 'fund-user'){
         include "./src/funduser.php";
-    } 
+    } elseif ($_GET['a'] === 'edit-transaction'){
+        include "./src/edittransaction.php";
+    }
     
     
     
