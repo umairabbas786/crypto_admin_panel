@@ -41,10 +41,10 @@ if(Sessionset('admin') == false){
                             <div>
                                 <div class="top-bar-title padding-bottom pull-left">Cooling Period</div>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <a href="addcooling.php" class="btn btn-theme"><span
                                         class="fa fa-plus"> &nbsp;</span>Add User</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ if(Sessionset('admin') == false){
 		    var id=$( this ).val();
         $.ajax({
           type:'POST',
-          url:'enable_disable_cooling_period.php',
+          url:'?a=edit-cooling',
           data:{id : id},
           success:function(data)
           {
@@ -122,7 +122,7 @@ if(Sessionset('admin') == false){
 		    var id=$( this ).val();
         $.ajax({
           type:'POST',
-          url:'enable_disable_cooling_period.php',
+          url:'?a=edit-cooling',
           data:{idd : id},
           success:function(data)
           {

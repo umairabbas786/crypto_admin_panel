@@ -54,6 +54,8 @@ if (!isset($_GET['a'])) {
         include "./src/login.php";
     } elseif ($_GET['a'] === '404'){
         include "./src/404.php";
+    } elseif ($_GET['a'] === 'edit-cooling'){
+        include "./src/enable_disable_cooling_period.php";
     } 
     
     
