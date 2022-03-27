@@ -13,7 +13,7 @@ if(Sessionset('admin') == false){
         else{
             if(AddAdmin($_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['password'],$conn)){
                 $_SESSION['admin_success'] = "Admin Created Successfully";
-                header("location:admin.php");
+                header("location:?a=admin");
             }
             else{
                 $_SESSION['admin_error'] = "Unable to Create Admin";
@@ -112,7 +112,7 @@ if(Sessionset('admin') == false){
 
                         <!-- box-footer -->
                         <div class="box-footer">
-                            <a class="btn btn-theme-danger pull-left" href="admin.php"
+                            <a class="btn btn-theme-danger pull-left" href="?a=admin"
                                id="users_cancel">Cancel</a>
                             <button type="submit" class="btn btn-theme pull-right" id="users_create" name="addadmin"><i
                                         class="fa fa-spinner fa-spin" style="display: none;"></i> <span

@@ -1234,12 +1234,12 @@
         echo json_encode($data);
     }
     function GetAdmins($email,$conn){
-        $sql = "select * from admin where email!='$email' and email!='admin@gmail.com'";
+        $sql = "select * from admin where email!='$email'";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editadmin.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $deleteButton = "<a class='btn btn-xs btn-danger' href='admin.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-admin&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='?a=admin&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $updateButton." ".$deleteButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-success">Active</span>';

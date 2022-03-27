@@ -11,7 +11,7 @@ if(CheckGet('id') == false){
     if(isset($_POST['update'])){
         if(UpdateAdmin($_GET['id'],$_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['status'],$conn)){
             $_SESSION['admin_success'] = "Admin Updated Successfully";
-            header("location:admin.php");
+            header("location:?a=admin");
         }
         else{
             $_SESSION['admin_error'] = "Unable to Update Admin";
@@ -107,7 +107,7 @@ if(CheckGet('id') == false){
                                     <!-- box-footer -->
                                     <div class="box-footer">
                                         <a class="btn btn-theme-danger pull-left"
-                                            href="admin.php"
+                                            href="?a=admin"
                                             id="users_cancel">Cancel</a>
                                         <button type="submit" class="btn btn-theme pull-right" name="update" id="users_create"><i
                                                 class="fa fa-spinner fa-spin" style="display: none;"></i> <span

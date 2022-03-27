@@ -40,8 +40,6 @@ if(CheckGet('id') == false){
         <!-- /.Flash Message  -->
 
         <?php include "include/sidenav.php";?>
-
-
         <div class="content-wrapper">
             <!-- Main content -->
             <section class="content">

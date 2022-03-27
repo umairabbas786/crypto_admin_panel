@@ -4,7 +4,21 @@ if(Sessionset('admin') == false){
 	header("location:login.php");
 }
 ?>
-
+<?php 
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $sql = "delete from admin where id = '$id'";
+        $r = $conn->query($sql);
+        if($r){
+            $_SESSION['success'] = "Admin Deleted SuccessFully";
+            header("location:?a=admin");
+        }
+        else{
+            $_SESSION['error'] = "Unable to Delete Admin";
+            header("location:?a=admin");
+        }
+    }
+?>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper_custom">
         <?php include "include/nav.php";?>
@@ -42,7 +56,7 @@ if(Sessionset('admin') == false){
                             </div>
 
                             <div>
-                                <a href="addadmin.php"
+                                <a href="?a=add-admin"
                                     class="btn btn-theme"><span class="fa fa-plus"> &nbsp;</span>Add Admin</a>
                             </div>
                         </div>
@@ -115,5 +129,12 @@ if(Sessionset('admin') == false){
         <?php include "include/footer.php";?>
         <div class="control-sidebar-bg"></div>
     </div>
-    
+    <script>
+        function confirmationDelete(anchor)
+        {
+            var conf = confirm('Delete this Admin?');
+            if(conf)
+            window.location=anchor.attr("href");
+        }
+    </script>
     <?php include "include/script.php";?>

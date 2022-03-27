@@ -9,7 +9,7 @@ if(Sessionset('admin') == false){
         $row = GetUserWithId($_GET['id'],$conn);
         if(DeleteUser($row['email'],$conn)){
             $_SESSION['success'] = "User Deleted SuccessFully";
-            header("location:user.php");
+            header("location:?a=user");
         }
         else{
             $_SESSION['error'] = "Unable to Delete User";

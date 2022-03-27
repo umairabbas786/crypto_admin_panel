@@ -42,6 +42,10 @@ if (!isset($_GET['a'])) {
         include "./src/funduser.php";
     } elseif ($_GET['a'] === 'edit-transaction'){
         include "./src/edittransaction.php";
+    } elseif ($_GET['a'] === 'edit-admin'){
+        include "./src/editadmin.php";
+    } elseif ($_GET['a'] === 'add-admin'){
+        include "./src/addadmin.php";
     }
     
     
