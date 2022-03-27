@@ -7,16 +7,30 @@ if(CheckGet('id') == false){
     header("location:?a=404");
 }
 ?>
+<?php $row = GetWithdrawWithId($_GET['id'],$conn);?>
 <?php 
 if (isset($_POST['withdraw'])) {
     $Approve=$_GET['id'];
     $status = $_POST['status'];
+    $ema = $row['sender'];
+    $bal = $_POST['balnce'];
+    $old = GetUserBalance($row['sender'],$conn);
+    if($status == '1' && ($row['status'] == '0' || $row['status'] == '-1')){
+        $newbal = $old - $bal;
+        $sql = "update user set balance = '$newbal' where email = '$ema'";
+        $conn->query($sql);
+    }
+    if(($status == '0' && $row['status'] == '1') || ($status == '-1' && $row['status'] == '1')){
+        $newbal = $old + $bal;
+        $sql = "update user set balance = '$newbal' where email = '$ema'";
+        $conn->query($sql);
+    }
     $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
     $update = "UPDATE transection  SET status='$status' WHERE approve_id='$Approve' AND method='Withdraw'";
     $conn->query($mysqli);
     if ($conn->query($update)){
         $_SESSION['withdraw_success'] = "Withdraw Updated Successfully!";
-        header("location:withdraw.php");
+        header("location:?a=withdraw");
     }
     else{
         $_SESSION['withdraw_error'] = "Unable to Update Withdraw";
@@ -29,7 +43,6 @@ if (isset($_POST['withdraw'])) {
         <?php include "include/nav.php";?>
 
         <?php include "include/sidenav.php";?>
-        <?php $row = GetWithdrawWithId($_GET['id'],$conn);?>
         <div class="content-wrapper">
             <!-- Main content -->
             <section class="content">
@@ -116,6 +129,7 @@ if (isset($_POST['withdraw'])) {
                                                     </div> -->
 
                                                     <div class="form-group">
+                                                        <input type="hidden" value="<?php echo $row['price'];?>" name="balnce">
                                                         <label class="control-label col-sm-3" for="status">Change
                                                             Status</label>
                                                         <div class="col-sm-9">

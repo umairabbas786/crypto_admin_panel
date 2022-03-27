@@ -957,7 +957,7 @@
         $rows = array();
         while($row = mysqli_fetch_array($r)){
             $updateButton = "<a class='btn btn-xs btn-primary' href='?a=ticket-reply&id=".$row['id']."'' ><i class='glyphicon glyphicon-send'></i></a>";
-            $deleteButton = "<a class='btn btn-xs btn-danger' href='ticket.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='?a=ticket&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
             $action = $updateButton.' '.$deleteButton;
             if($row['status'] == '1'){
                 $row['status'] = '<span class="label label-success">Open</span>';

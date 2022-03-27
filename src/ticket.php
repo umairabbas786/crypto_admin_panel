@@ -4,23 +4,43 @@ if(Sessionset('admin') == false){
 	header("location:?a=login");
 }
 ?>
+<?php 
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $sql = "delete from ticket where id = '$id'";
+        $r = $conn->query($sql);
+        $s = "delete from ticket_chat where ticket_id = '$id'";
+        $rr = $conn->query($s);
+        if($r && $rr){
+            $_SESSION['success'] = "Ticket Deleted SuccessFully";
+            header("location:?a=ticket");
+        }
+        else{
+            $_SESSION['error'] = "Unable to Delete Ticket";
+            header("location:?a=ticket");
+        }
+    }
+?>
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper_custom">
         <?php include "include/nav.php";?>
         <!-- Flash Message  -->
         <div class="flash-container">
+        <?php if(isset($_SESSION['success'])){?>
             <div class="alert alert-success text-center" id="success_message_div"
-                style="margin-bottom:0px;display:none;" role="alert">
+                style="margin-bottom:0px;" role="alert">
                 <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
-                <p id="success_message"></p>
+                <p id="success_message"><?php echo $_SESSION['success'];?></p>
             </div>
-
-            <div class="alert alert-danger text-center" id="error_message_div" style="margin-bottom:0px;display:none;"
+        <?php UnsetSession('success');}?>
+        <?php if(isset($_SESSION['error'])){?>
+            <div class="alert alert-danger text-center" id="error_message_div" style="margin-bottom:0px;"
                 role="alert">
                 <p><a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a></p>
-                <p id="error_message"></p>
+                <p id="error_message"><?php echo $_SESSION['error'];?></p>
             </div>
+            <?php }?>
         </div>
         <!-- /.Flash Message  -->
 
@@ -29,53 +49,15 @@ if(Sessionset('admin') == false){
         <div class="content-wrapper">
             <!-- Main content -->
             <section class="content">
-                <div class="box">
-                    <div class="box-body pb-20">
-                        <form class="form-horizontal" action="" method="GET">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="d-flex flex-wrap justify-content-between">
-                                        <div class="d-flex flex-wrap">
-                                            <div class="pr-25">
-                                                <label for="status">Status</label><br>
-                                                <select class="form-control select2" name="status" id="status">
-                                                    <option value="all" selected>All</option>
-                                                    <option value="1">
-                                                        Open
-                                                    </option>
-                                                    <option value="2">
-                                                        In Progress
-                                                    </option>
-                                                    <option value="3">
-                                                        Hold
-                                                    </option>
-                                                    <option value="4">
-                                                        Closed
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="input-group" style="margin-top: 25px;">
-                                                <button type="submit" class="btn btn-theme" id="btn">Filter</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
                 <div class="box box-default">
                     <div class="box-body">
                         <div class="d-flex justify-content-between">
                             <div>
                                 <div class="top-bar-title padding-bottom pull-left">Tickets</div>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <a href="#" class="btn btn-theme"><span class="fa fa-plus"> &nbsp;</span>Add Ticket</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -196,5 +178,14 @@ if(Sessionset('admin') == false){
 
     <script type="text/javascript">
         $(".select2").select2({});
+    </script>
+
+<script>
+        function confirmationDelete(anchor)
+        {
+            var conf = confirm('Delete this Ticket?');
+            if(conf)
+            window.location=anchor.attr("href");
+        }
     </script>
 <?php include 'include/script.php';?>
