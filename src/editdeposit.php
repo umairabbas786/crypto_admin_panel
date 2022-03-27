@@ -7,16 +7,30 @@ if(CheckGet('id') == false){
     header("location:?a=404");
 }
 ?>
+<?php $row = GetDepositWithId($_GET['id'],$conn);?>
 <?php 
 if (isset($_POST['deposit'])) {
+    $ema = $row['sender'];
     $Approve=$_GET['id'];
     $status = $_POST['status'];
+    $bal = $_POST['balnce'];
+    $old = GetUserBalance($row['sender'],$conn);
+    if($status == '1' && ($row['status'] == '0' || $row['status'] == '-1')){
+        $newbal = $bal + $old;
+        $sql = "update user set balance = '$newbal' where email = '$ema'";
+        $conn->query($sql);
+    }
+    if(($status == '0' && $row['status'] == '1') || ($status == '-1' && $row['status'] == '1')){
+        $newbal = $old - $bal;
+        $sql = "update user set balance = '$newbal' where email = '$ema'";
+        $conn->query($sql);
+    }
     $mysqli="UPDATE  deposit SET status='$status' WHERE id='$Approve'";
     $update = "UPDATE transection  SET status='$status' WHERE approve_id='$Approve' AND method='Fund Wallet'";
     $conn->query($mysqli);
     if ($conn->query($update)){
         $_SESSION['deposit_success'] = "Deposit Updated Successfully!";
-        header("location:deposit.php");
+        header("location:?a=deposit");
     }
     else{
         $_SESSION['deposit_error'] = "Unable to Update Deposit";
@@ -29,7 +43,6 @@ if (isset($_POST['deposit'])) {
         <?php include "include/nav.php";?>
 
         <?php include "include/sidenav.php";?>
-        <?php $row = GetDepositWithId($_GET['id'],$conn);?>
         <div class="content-wrapper">
             <!-- Main content -->
             <section class="content">
@@ -53,10 +66,6 @@ if (isset($_POST['deposit'])) {
                         </div>
                     </div>
                 </div>
-
-
-
-
                 <div class="my-30">
                     <div class="row">
                         <form action="#" class="form-horizontal"
@@ -120,6 +129,7 @@ if (isset($_POST['deposit'])) {
                                                         <label class="control-label col-sm-3" for="status">Change
                                                             Status</label>
                                                         <div class="col-sm-9">
+                                                            <input type="hidden" value="<?php echo $row['price'];?>" name="balnce">
                                                             <select class="form-control select2" name="status"
                                                                 style="width: 60%;">
                                                                 <option value="1" <?php if($row['status'] == '1'){echo "selected";}?>>Success</option>
@@ -134,7 +144,7 @@ if (isset($_POST['deposit'])) {
                                                             <div class="col-md-3"></div>
                                                             <div class="col-md-2"><a id="cancel_anchor"
                                                                     class="btn btn-theme-danger pull-left"
-                                                                    href="deposit.php">Cancel</a>
+                                                                    href="?a=deposit">Cancel</a>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <button type="submit" name="deposit" class="btn btn-theme pull-right"

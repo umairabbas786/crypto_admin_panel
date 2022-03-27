@@ -647,7 +647,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editdeposit.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-deposit&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -677,7 +677,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editdeposit.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-deposit&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -707,7 +707,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editdeposit.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-deposit&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -737,7 +737,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editdeposit.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-deposit&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -767,7 +767,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editwithdraw.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-withdraw&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -809,7 +809,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editwithdraw.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-withdraw&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -851,7 +851,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editwithdraw.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-withdraw&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
@@ -893,7 +893,7 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='editwithdraw.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-withdraw&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $action = $updateButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
