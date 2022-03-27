@@ -5,7 +5,7 @@
         if(AdminStatusCheck($_POST['email'],$conn) == true){
             if(ValidateLogin($_POST['email'],$_POST['password'],$conn) >= 1){
                 $_SESSION['admin'] = $_POST['email'];
-                header("location:index.php");
+                header("location:?a=home");
             }
             else{
                 $_SESSION['loginerr'] = "Please Check Your Email/Password";
@@ -19,7 +19,7 @@
 <body class="hold-transition login-page" style="background-color:#ececec;">
     <div class="login-box">
         <div class="login-logo">
-            <a href="index.php"><img src='https://newglobalswift.us/public/images/logos/1614196665_logo.png'
+            <a href=""><img src='https://newglobalswift.us/public/images/logos/1614196665_logo.png'
                     class="img-responsive" width="282" height="63" style="width:75%; margin:auto;"></a>
         </div><!-- /.login-logo -->
         <div class="login-box-body" style="padding:40px 20px; box-shadow:0 0 5px #121212;">

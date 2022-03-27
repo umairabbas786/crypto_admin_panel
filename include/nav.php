@@ -40,12 +40,12 @@
 
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="https://freedompayuniverse.com/admin/profile"
+                                        <a href="?a=profile"
                                             class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
 
-                                        <a href="signout.php"
+                                        <a href="?a=logout"
                                             class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>

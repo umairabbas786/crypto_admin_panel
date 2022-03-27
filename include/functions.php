@@ -1,4 +1,10 @@
 <?php
+    function siteUrl($conn){
+        $s = "select * from setting where id = 1";
+        $r = $conn->query($s);
+        $row = mysqli_fetch_assoc($r);
+        return $row['url'];
+    }
     function DeleteUser($email,$conn)
     {
         $sql1 = "delete from user where email = '$email'";
