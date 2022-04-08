@@ -8,9 +8,23 @@ if(CheckGet('id') == false){
 }
 ?>
 <?php 
+    if(isset($_POST['change'])){
+        $id = $_GET['id'];
+        $status = $_POST['status'];
+        $sql = "update ticket set status = '$status' where id = '$id'";
+        $r = $conn->query($sql);
+        if($r){
+            $_SESSION['ticket_reply_success'] = "Ticket Status Updated";
+            header("location:#");
+        }
+        else{
+            $conn->error;
+        }
+    }
+
     if(isset($_POST['update'])){
         if(UpdateUser($_GET['id'],$_POST['username'],$_POST['phone'],$_POST['email'],$_POST['password'],$_POST['status'],$conn)){
-            $_SESSION['success'] = "User Updated Successfully";
+            $_SESSION['success'] = "User Updated";
             header("location:user.php");
         }
         else{
@@ -23,7 +37,7 @@ if(CheckGet('id') == false){
     $sql = "delete from ticket_chat where id = '$idz'";
     $r = $conn->query($sql);
     if($r){
-        $_SESSION['ticket_reply_success'] = "Message Deleted Successfully";
+        $_SESSION['ticket_reply_success'] = "Message Deleted";
         header("location:#");
     } 
     else{
@@ -122,7 +136,8 @@ if (isset($_POST['send_message'])) {
 
                         <div class="col-md-2">
                             <span>
-                                <select id="status_ticket" class="form-control">
+                                <form method="POST" action=''>
+                                <select id="status_ticket" name="status" class="form-control">
                                     <option <?php if($row['status'] == '1'){echo "selected";}?> value="1">Open</option>
                                     <option <?php if($row['status'] == '-1'){echo "selected";}?> value="-1">In Progress
                                     </option>
@@ -131,6 +146,8 @@ if (isset($_POST['send_message'])) {
                                     <option <?php if($row['status'] == '0'){echo "selected";}?> value="0">Closed
                                     </option>
                                 </select>
+                                <button class="btn btn-primary pt-2" type="submit" name="change">Change Status</button>
+                                </form>
                             </span>
                         </div>
                     </div>
