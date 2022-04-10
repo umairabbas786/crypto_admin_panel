@@ -10,17 +10,20 @@ if(Sessionset('admin') == false){
         <?php include "include/nav.php";?>
         <!-- Flash Message  -->
         <div class="flash-container">
+        <?php if(isset($_SESSION['transfer_success'])){?>
             <div class="alert alert-success text-center" id="success_message_div"
-                style="margin-bottom:0px;display:none;" role="alert">
+                style="margin-bottom:0px;" role="alert">
                 <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
-                <p id="success_message"></p>
+                <p id="success_message"><?php echo $_SESSION['transfer_success'];?></p>
             </div>
-
-            <div class="alert alert-danger text-center" id="error_message_div" style="margin-bottom:0px;display:none;"
+        <?php UnsetSession('transfer_success');}?>
+        <?php if(isset($_SESSION['transfer_error'])){?>
+            <div class="alert alert-danger text-center" id="error_message_div" style="margin-bottom:0px;"
                 role="alert">
                 <p><a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a></p>
-                <p id="error_message"></p>
+                <p id="error_message"><?php echo $_SESSION['transfer_error'];?></p>
             </div>
+            <?php UnsetSession('transfer_error');}?>
         </div>
         <!-- /.Flash Message  -->
 
@@ -76,6 +79,7 @@ if(Sessionset('admin') == false){
                                                         <!-- <th title="Currency">Currency</th> -->
                                                         <th title="Receiver">Receiver</th>
                                                         <th title="Note">Note</th>
+                                                        <th title="Status">Status</th>
                                                         <th title="Action">Action</th>
                                                     </tr>
                                                 </thead>
@@ -109,6 +113,10 @@ if(Sessionset('admin') == false){
                                                             { 
                                                                 'data': 'note',
                                                                 'title': 'Note' 
+                                                            },
+                                                            {
+                                                                'data': 'status',
+                                                                'title': 'Status'
                                                             },
                                                             { 
                                                                 'data': 'action',

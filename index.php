@@ -60,7 +60,9 @@ if (!isset($_GET['a'])) {
         include "./src/editdeposit.php";
     } elseif ($_GET['a'] === 'edit-withdraw') {
         include "./src/editwithdraw.php";
-    } 
+    } elseif ($_GET['a'] === 'edit-transfer') {
+        include "./src/edittransfers.php";
+    }
     
     
     elseif ($_GET['a'] === 'vape-cartridges') {

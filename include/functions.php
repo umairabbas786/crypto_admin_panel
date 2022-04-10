@@ -630,6 +630,12 @@
         $row = mysqli_fetch_array($r);
         return $row;
     }
+    function GetTransferWithId($id,$conn){
+        $sql = "select * from wallet_history where id = '$id'";
+        $r = $conn->query($sql);
+        $row = mysqli_fetch_array($r);
+        return $row;
+    }
     function GetPayoutWithId($id,$conn){
         $sql = "select * from payout where id = '$id'";
         $r = $conn->query($sql);
@@ -935,8 +941,15 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $deleteButton = "<a class='btn btn-xs btn-danger' href='transfers.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
-            $action = $deleteButton;
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-transfer&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='?a=transfer&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $action = $updateButton . $deleteButton;
+            if($row['status'] == '0'){
+                $row['status'] = '<span class="label label-primary">Pending</span>';
+            }
+            if($row['status'] == '1'){
+                $row['status'] = '<span class="label label-success">Success</span>';
+            }
             $row['price'] = '<span class="text-danger">- $'.$row['price'].'</span>';
             $row['sender'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['sender'],$conn).'>'.$row['sender'].'</a>';
             $data[] = array(
@@ -946,6 +959,7 @@
                 "amount" => $row['price'],
                 "receiver" => $row['receiver'],
                 "note" => $row['description'],
+                "status" => $row['status'],
                 "action" => $action
               );
         }
