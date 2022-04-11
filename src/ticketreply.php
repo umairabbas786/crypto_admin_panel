@@ -163,7 +163,7 @@ if (isset($_POST['send_message'])) {
                                         <label class="col-sm-1 control-label require">Reply</label>
                                         <div class="col-sm-11">
                                             <textarea name="message" id="message" class="message form-control" cols="30"
-                                                rows="10"></textarea>
+                                                rows="10" style="height:150px;"></textarea>
                                             <div id="error-message"></div>
                                         </div>
                                     </div>
