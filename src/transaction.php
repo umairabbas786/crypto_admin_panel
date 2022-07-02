@@ -4,6 +4,63 @@ if(Sessionset('admin') == false){
 	header("location:?a=login");
 }
 ?>
+<?php 
+    if(isset($_GET['deleteid'])){
+        $id = $_GET['deleteid'];
+        $s = "select * from transection where id = $id";
+        $r = $conn->query($s);
+        $row = mysqli_fetch_assoc($r);
+        $user_email = $row['sender'];
+        $amount = $row['price'];
+        $method = $row['method'];
+        if($method == 'Withdraw'){
+            $sql = "update user set balance = balance + '$amount' where email = '$user_email'";
+            $rr = $conn->query($sql);
+            if($rr){
+                $s = "delete from transection where id = '$id'";
+                $r = $conn->query($s);
+                $_SESSION['transaction_success'] = "Transaction Deleted Successfully";
+            }else{
+                $_SESSION['transaction_error'] = "Unable to delete transaction";
+            }
+        }
+        if($method == 'Sender'){
+            $sql = "update user set balance = balance + '$amount' where email = '$user_email'";
+            $rr = $conn->query($sql);
+            if($rr){
+                $s = "delete from transection where id = '$id'";
+                $r = $conn->query($s);
+                $_SESSION['transaction_success'] = "Transaction Deleted Successfully";
+            }else{
+                $_SESSION['transaction_error'] = "Unable to delete transaction";
+            }
+        }
+        if($method == 'Reciever'){
+            $sql = "update user set balance = balance - '$amount' where email = '$user_email'";
+            $rr = $conn->query($sql);
+            if($rr){
+                $s = "delete from transection where id = '$id'";
+                $r = $conn->query($s);
+                $_SESSION['transaction_success'] = "Transaction Deleted Successfully";
+            }else{
+                $_SESSION['transaction_error'] = "Unable to delete transaction";
+            }
+        }
+        if($method == 'Administration'){
+            $sql = "update user set balance = balance - '$amount' where email = '$user_email'";
+            $rr = $conn->query($sql);
+            if($rr){
+                $s = "delete from transection where id = '$id'";
+                $r = $conn->query($s);
+                $_SESSION['transaction_success'] = "Transaction Deleted Successfully";
+            }else{
+                $_SESSION['transaction_error'] = "Unable to delete transaction";
+            }
+        }
+    }
+
+
+?>
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper_custom">
