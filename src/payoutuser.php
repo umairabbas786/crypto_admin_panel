@@ -10,12 +10,17 @@ if(CheckGet('id') == false){
 <?php $row = GetUserWithId($_GET['id'],$conn);?>
 <?php 
     if(isset($_POST['funduser'])){
-        if(AddFundToUserWallet($row['email'],$_POST['amount'],$conn)){
-            $_SESSION['success'] = "User Funded Successfully";
-            header("location:?a=user");
-        }
-        else{
-            $_SESSION['error'] = "Unable to Fund User";
+        $bal = GetUserBalance($row['email'],$conn);
+        if($_POST['amount']<=$bal){
+            if(RemoveFundToUserWallet($row['email'],$_POST['amount'],$conn)){
+                $_SESSION['success'] = "User Payed Out Successfully";
+                header("location:?a=user");
+            }
+            else{
+                $_SESSION['error'] = "Unable to Payout User";
+            }
+        }else{
+            $_SESSION['error'] = "Amount is greater than available balance";
         }
     }
 
@@ -27,11 +32,13 @@ if(CheckGet('id') == false){
 
         <!-- Flash Message  -->
         <div class="flash-container">
-            <div class="alert alert-success text-center" id="success_deposit" style="margin-bottom:0px;display:none;"
+        <?php if(isset($_SESSION['error'])){?>
+            <div class="alert alert-danger text-center" id="error_message_div" style="margin-bottom:0px;"
                 role="alert">
-                <a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a>
-                <p id="success_deposit"></p>
+                <p><a href="#" style="float:right;" class="alert-close" data-dismiss="alert">&times;</a></p>
+                <p id="error_message"><?php echo $_SESSION['error'];?></p>
             </div>
+            <?php }?>
         </div>
         <!-- /.Flash Message  -->
 
@@ -67,7 +74,7 @@ if(CheckGet('id') == false){
                     <div class="col-md-5">
                         <div class="pull-right">
                             <button style="margin-top: 15px;" type="button"
-                                class="pull-right btn btn-theme active">Deposit</button>
+                                class="pull-right btn btn-theme active">Payout</button>
                         </div>
                     </div>
                 </div>
@@ -101,9 +108,9 @@ if(CheckGet('id') == false){
                                                         <a href="?a=edit-user&id=<?php echo $_GET['id'];?>"
                                                             class="btn btn-theme-danger"><span><i
                                                                     class="fa fa-angle-left"></i>&nbsp;Back</span></a>
-                                                        <button type="submit" name="funduser" onclick="return confirm('Are you sure you want to deposit?');" class="btn btn-theme" id="deposit-create">
+                                                        <button type="submit" name="funduser" onclick="return confirm('Are you sure you want to Payout?');" class="btn btn-theme" id="deposit-create">
                                                             <i class="fa fa-spinner fa-spin" style="display: none;"></i>
-                                                            <span id="deposit-create-text">Deposit&nbsp;</span>
+                                                            <span id="deposit-create-text">Payout&nbsp;</span>
                                                         </button>
                                                     </div>
                                                 </div>

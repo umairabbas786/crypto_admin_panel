@@ -62,6 +62,19 @@
             return false;
         }
     }
+    function RemoveFundToUserWallet($user,$amount,$conn){
+        $transection_id = mt_rand(10000,99999);
+        $bal = GetUserBalance($user,$conn);
+        $newbal = $bal - $amount;
+        $sql1 = "update user set balance = '$newbal' where email = '$user'";
+        $r = $conn->query($sql1);
+        if($r){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     function KycRequests($conn){
         $sql = "select count(id) from kyc where status = '0'";
         $r = $conn->query($sql);
@@ -297,7 +310,7 @@
         }
     }
     function GetUserDetails($conn){
-        $sql = "select * from user";
+        $sql = "select * from user where id>600";
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
@@ -330,9 +343,7 @@
                 "id" => $row['id'],
                 "username" => $row['username'],
                 "email" => $row['email'],
-                "phone" => $row['phone'],
                 "balance" => $row['balance'],
-                "account_type" => $row['account_type'],
                 "password" => $row['password'],
                 "email_verification" => $row['email_verification'],
                 "block_status" => $row['block_status'],
@@ -449,8 +460,9 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='edittransaction.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $action = $updateButton;
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-transaction&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='?a=transaction&deleteid=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $action = $updateButton . ' ' . $deleteButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
             }
@@ -494,8 +506,9 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='edittransaction.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $action = $updateButton;
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-transaction&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='?a=transaction&deleteid=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $action = $updateButton . ' ' . $deleteButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
             }
@@ -539,8 +552,9 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='edittransaction.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $action = $updateButton;
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-transaction&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='?a=transaction&deleteid=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $action = $updateButton . ' ' . $deleteButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
             }
@@ -584,8 +598,9 @@
         $r = $conn->query($sql);
         $rows = array();
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='edittransaction.php?id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $action = $updateButton;
+            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-transaction&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $deleteButton = "<a class='btn btn-xs btn-danger' href='?a=transaction&deleteid=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
+            $action = $updateButton . ' ' . $deleteButton;
             if($row['status'] == '0'){
                 $row['status'] = '<span class="label label-primary">Pending</span>';
             }

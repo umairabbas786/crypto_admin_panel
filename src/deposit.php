@@ -42,6 +42,7 @@ if(Sessionset('admin') == false){
                                             <!-- Status -->
                                             <div class="pr-25">
                                                 <label for="status">Status</label><br>
+                                                <input type="hidden" name="a" value="deposit">
                                                 <select class="form-control select2" name="status" id="status">
                                                     <option value="all" selected>All</option>
                                                     <option value="pending">
@@ -117,6 +118,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#depositt').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllDeposit($conn)?>,
                                                         columns : [
                                                             { 
@@ -156,6 +159,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#depositt').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetPendingDeposit($conn)?>,
                                                         columns : [
                                                             { 
@@ -195,6 +200,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#depositt').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetSuccessDeposit($conn)?>,
                                                         columns : [
                                                             { 
@@ -234,6 +241,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#depositt').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetCancelledDeposit($conn)?>,
                                                         columns : [
                                                             { 
@@ -273,6 +282,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#depositt').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllDeposit($conn)?>,
                                                         columns : [
                                                             { 

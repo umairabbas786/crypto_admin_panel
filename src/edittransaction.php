@@ -12,41 +12,15 @@ if(CheckGet('id') == false){
 if (isset($_POST['transaction'])) {
     $status = $_POST['status'];
     $Approve = $row['approve_id'];
-    if($status == "delete"){
-        $sql = "delete from withdraw where id = '$Approve'";
-        $conn->query($sql);
-        $sql1 = "delete from deposit where id = '$Approve'";
-        $conn->query($sql1);
-        $sql2 = "delete from transection where approve_id = '$Approve'";
-        $a3 = $conn->query($sql2);
-        if($a3){
-            $_SESSION['transaction_success'] = "Transaction Deleted Successfully!";
-            header("location:transaction.php");
-        }
-        else{
-            $_SESSION['transaction_error'] = "Unable to Update Transaction";
-        }
-    }else{
-        if($row['method'] == 'Withdraw'){
-            $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
-            $conn->query($mysqli);
-        }
-        if($row['method'] == 'Sender'){
-            $mysqli="UPDATE  withdraw SET status='$status' WHERE id='$Approve'";
-            $conn->query($mysqli);
-        }
-        if($row['method'] == 'Reciever'){
-            $mysqli="UPDATE  deposit SET status='$status' WHERE id='$Approve'";
-            $conn->query($mysqli);
-        }
-        $update = "UPDATE transection  SET status='$status' WHERE approve_id='$Approve'";
-        if ($conn->query($update)){
-            $_SESSION['transaction_success'] = "Transaction Updated Successfully!";
-            header("location:transaction.php");
-        }
-        else{
-            $_SESSION['transaction_error'] = "Unable to Update Transaction";
-        }
+    $id = $_GET['id'];
+    
+    $update = "UPDATE transection  SET status='$status' WHERE id='$id'";
+    if ($conn->query($update)){
+        $_SESSION['transaction_success'] = "Transaction Updated Successfully!";
+        header("location:?a=transaction");
+    }
+    else{
+        $_SESSION['transaction_error'] = "Unable to Update Transaction";
     }
 }
 ?>
@@ -146,7 +120,6 @@ if (isset($_POST['transaction'])) {
                                                                 <option value="1" <?php if($row['status'] == '1'){echo "selected";}?>>Success</option>
                                                                 <option value="0" <?php if($row['status'] == '0'){echo "selected";}?>>Pending</option>
                                                                 <option value="-1" <?php if($row['status'] == '-1'){echo "selected";}?>>Cancel</option>
-                                                                <option value="delete">Delete</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -156,7 +129,7 @@ if (isset($_POST['transaction'])) {
                                                             <div class="col-md-3"></div>
                                                             <div class="col-md-2"><a id="cancel_anchor"
                                                                     class="btn btn-theme-danger pull-left"
-                                                                    href="transaction.php">Cancel</a>
+                                                                    href="?a=transaction">Cancel</a>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <button type="submit" name="transaction" class="btn btn-theme pull-right"

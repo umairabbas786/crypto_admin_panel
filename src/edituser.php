@@ -85,7 +85,7 @@ if(CheckGet('id') == false){
                                 class="btn btn-theme">Deposit</a>
                             &nbsp;&nbsp;&nbsp;
                             <a style="margin-top: 15px;"
-                                href="#"
+                                href="?a=payout-user&id=<?php echo $_GET['id'];?>"
                                 class="btn btn-theme">Payout</a>
                             &nbsp;&nbsp;&nbsp;
 

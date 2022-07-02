@@ -41,6 +41,7 @@ if(Sessionset('admin') == false){
                                         <div class="d-flex flex-wrap">
                                             <div class="pr-25">
                                                 <label for="status">Status</label><br>
+                                                <input type="hidden" name="a" value="withdraw">
                                                 <select class="form-control select2" name="status" id="status">
                                                     <option value="all" selected>All</option>
                                                     <option value="pending">
@@ -115,6 +116,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#withdraw').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllWithdraw($conn)?>,
                                                         columns : [
                                                             { 
@@ -158,6 +161,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#withdraw').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetPendingWithdraw($conn)?>,
                                                         columns : [
                                                             { 
@@ -201,6 +206,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#withdraw').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetSuccessWithdraw($conn)?>,
                                                         columns : [
                                                             { 
@@ -244,6 +251,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#withdraw').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetCancelledWithdraw($conn)?>,
                                                         columns : [
                                                             { 
@@ -287,6 +296,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#withdraw').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllWithdraw($conn)?>,
                                                         columns : [
                                                             { 

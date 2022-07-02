@@ -106,7 +106,7 @@
 					<p class="pl-4 configuration">Configurations</p>
 					<!-- Currencies & Fees -->
 					<li>
-						<a href="#"><i class="fa fa-money"></i><span>Currencies</span></a>
+						<a href="?a=fee"><i class="fa fa-money"></i><span>Currencies</span></a>
 					</li>
 
 					<!-- settings -->

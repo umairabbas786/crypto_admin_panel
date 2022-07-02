@@ -51,7 +51,7 @@ if(Sessionset('admin') == false){
 							<!-- small box -->
 							<div class="small-box bg-red">
 								<div class="inner">
-									<h3>$ <?php echo GetUsersBalance($conn);?></h3>
+									<h3>$ <?php echo round(GetUsersBalance($conn),2);?></h3>
 									<p>Total User Balance</p>
 								</div>
 								<div class="icon">
@@ -185,4 +185,5 @@ if(Sessionset('admin') == false){
 	</div>
 	<?php unset($_SESSION['success_news']);?>
 	<?php unset($_SESSION['error_news']);?>
+	<?php UnsetSession('success_fee');?>
 	<?php include "include/script.php";?>

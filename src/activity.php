@@ -62,6 +62,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#activity').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetUserActivity($conn)?>,
                                                         columns : [
                                                             { 

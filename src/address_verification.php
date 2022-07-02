@@ -34,7 +34,7 @@ if(Sessionset('admin') == false){
             <section class="content">
                 <div class="box">
                     <div class="box-body pb-20">
-                        <form class="form-horizontal" action="address_verification.php"
+                        <form class="form-horizontal" action=""
                             method="GET">
                             <div class="row">
                                 <div class="col-md-12">
@@ -43,6 +43,7 @@ if(Sessionset('admin') == false){
                                             <!-- Status -->
                                             <div class="pr-25">
                                                 <label for="status">Status</label><br>
+                                                <input type="hidden" name="a" value="address-kyc">
                                                 <select class="form-control select2" name="status" id="status">
                                                     <option value="all" selected>All</option>
                                                     <option value="pending">
@@ -113,6 +114,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#address').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllAddressProofs($conn)?>,
                                                         columns : [
                                                             { 
@@ -144,6 +147,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#address').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetPendingAddressProofs($conn)?>,
                                                         columns : [
                                                             { 
@@ -175,6 +180,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#address').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetApprovedAddressProofs($conn)?>,
                                                         columns : [
                                                             { 
@@ -206,6 +213,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#address').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetRejectedAddressProofs($conn)?>,
                                                         columns : [
                                                             { 
@@ -237,6 +246,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#address').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllAddressProofs($conn)?>,
                                                         columns : [
                                                             { 

@@ -88,6 +88,8 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#transfers').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetAllTransfers($conn)?>,
                                                         columns : [
                                                             { 

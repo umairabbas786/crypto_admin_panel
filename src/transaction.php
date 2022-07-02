@@ -42,6 +42,7 @@ if(Sessionset('admin') == false){
                                         <div class="d-flex flex-wrap">
                                             <div class="pr-25">
                                                 <label for="status">Status</label><br>
+                                                <input type="hidden" name="a" value="transaction">
                                                 <select class="form-control select2" name="status" id="status">
                                                     <option value="all" selected>All</option>
                                                     <option value="cancelled">
@@ -115,6 +116,8 @@ if(Sessionset('admin') == false){
                                         $(document).ready(function () {
                                             $('#transactions').DataTable({
                                                 "processing": true,
+                                                "order": [[ 0, "desc" ]]
+                                                        ,
                                                 data: <?php GetAllTransaction($conn);?>,
                                                 columns : [{
                                                         'data': 'id',
@@ -157,6 +160,8 @@ if(Sessionset('admin') == false){
                                         $(document).ready(function () {
                                             $('#transactions').DataTable({
                                                 "processing": true,
+                                                "order": [[ 0, "desc" ]]
+                                                        ,
                                                 data: <?php GetPendingTransaction($conn);?>,
                                                 columns : [{
                                                         'data': 'id',
@@ -199,6 +204,8 @@ if(Sessionset('admin') == false){
                                         $(document).ready(function () {
                                             $('#transactions').DataTable({
                                                 "processing": true,
+                                                "order": [[ 0, "desc" ]]
+                                                        ,
                                                 data: <?php GetSuccessTransaction($conn);?>,
                                                 columns : [{
                                                         'data': 'id',
@@ -241,6 +248,8 @@ if(Sessionset('admin') == false){
                                         $(document).ready(function () {
                                             $('#transactions').DataTable({
                                                 "processing": true,
+                                                "order": [[ 0, "desc" ]]
+                                                        ,
                                                 data: <?php GetCancelledTransaction($conn);?>,
                                                 columns : [{
                                                         'data': 'id',
@@ -283,6 +292,8 @@ if(Sessionset('admin') == false){
                                         $(document).ready(function () {
                                             $('#transactions').DataTable({
                                                 "processing": true,
+                                                "order": [[ 0, "desc" ]]
+                                                        ,
                                                 data: <?php GetAllTransaction($conn);?>,
                                                 columns : [{
                                                         'data': 'id',

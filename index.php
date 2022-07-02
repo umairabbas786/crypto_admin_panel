@@ -40,6 +40,8 @@ if (!isset($_GET['a'])) {
         include "./src/userticket.php";
     } elseif ($_GET['a'] === 'fund-user'){
         include "./src/funduser.php";
+    } elseif ($_GET['a'] === 'payout-user'){
+        include "./src/payoutuser.php";
     } elseif ($_GET['a'] === 'edit-transaction'){
         include "./src/edittransaction.php";
     } elseif ($_GET['a'] === 'edit-admin'){
@@ -62,26 +64,8 @@ if (!isset($_GET['a'])) {
         include "./src/editwithdraw.php";
     } elseif ($_GET['a'] === 'edit-transfer') {
         include "./src/edittransfers.php";
-    }
-    
-    
-    elseif ($_GET['a'] === 'vape-cartridges') {
-        include "./src/vape-cartridges.php";
-    } elseif ($_GET['a'] === 'store') {
-        include "./src/store.php";
-    } 
-    
-    
-    
-    
-    elseif ($_GET['a'] === 'edibles') {
-        include "./src/edibles.php";
-    } elseif ($_GET['a'] === 'pre-rolls') {
-        include "./src/pre-rolls.php";
-    } elseif ($_GET['a'] === 'logout') {
-        include "./src/signout.php";
-    } else{
-        include "./src/404.php";
+    } elseif ($_GET['a'] === 'fee') {
+        include "./src/fees.php";
     }
 }
 

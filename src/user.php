@@ -71,8 +71,6 @@ if(Sessionset('admin') == false){
                                                         <th title="ID">ID</th>
                                                         <th title="Name">Name</th>
                                                         <th title="Email">Email</th>
-                                                        <th title="Phone">Phone</th>
-                                                        <th title="Account Type">Account Type</th>
                                                         <th title="Password">Password</th>
                                                         <th title="Balance">Balance</th>
                                                         <th title="Email Verification">Email Verification</th>
@@ -85,7 +83,10 @@ if(Sessionset('admin') == false){
                                                 $(document).ready(function () {
                                                     $('#users').DataTable({
                                                         "processing":true,
+                                                        "order": [[ 0, "desc" ]]
+                                                        ,
                                                         data: <?php GetUserDetails($conn)?>,
+                                                        "deferRender": true,
                                                         columns : [
                                                             { 
                                                                 'data': 'id',
@@ -98,14 +99,6 @@ if(Sessionset('admin') == false){
                                                             { 
                                                                 'data': 'email',
                                                                 'title': 'Email' 
-                                                            },
-                                                            { 
-                                                                'data': 'phone',
-                                                                'title': 'phone' 
-                                                            },
-                                                            { 
-                                                                'data': 'account_type',
-                                                                'title': 'Account Type' 
                                                             },
                                                             { 
                                                                 'data': 'password',

@@ -3,7 +3,7 @@
 			<div class="full-width">
 				<a href="index.php" class="logo">
 					<span class="logo-mini"><b>NGS</b></span>
-					<img src="https://newglobalswift.us/public/images/logos/1614196665_logo.png" width="180" height="59" class="company-logo">
+					<img src="https://globalswift.us/public/images/logos/1614196665_logo.png" width="180" height="59" class="company-logo">
 				</a>
 			</div>
 
@@ -14,7 +14,7 @@
 				</a>
 				<div class="mobile-width">
 					<a href="index.php" class="mobile-logo">
-						<span class="logo-lg" style="font-size: 13px;"><b>New Global Swift</b></span>
+						<span class="logo-lg" style="font-size: 13px;"><b> Global Swift US</b></span>
 					</a>
 				</div>
 				<div class="navbar-custom-menu">
