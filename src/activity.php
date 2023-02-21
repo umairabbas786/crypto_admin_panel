@@ -57,39 +57,25 @@ if(Sessionset('admin') == false){
                                                         <th title="Browser">Browser | Platform</th>
                                                     </tr>
                                                 </thead>
+                                                <tbody>
+                                                    <?php 
+                                                        $sql = "select * from activity_log";
+                                                        $r = $conn->query($sql);
+                                                        $rows = array();
+                                                        while($row = mysqli_fetch_array($r)){
+                                                            $row['user'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['user'],$conn).'>'.$row['user'].'</a>';
+
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id'];?></td>
+                                                        <td><?php echo $row['date'];?></td>
+                                                        <td><?php echo $row['user'];?></td>
+                                                        <td><?php echo $row['ip_address'];?></td>
+                                                        <td><?php echo $row['browser'];?></td>
+                                                    </tr>
+                                                    <?php }?>
+                                                </tbody>
                                             </table>
-                                            <script type="text/javascript" language="javascript">
-                                                $(document).ready(function () {
-                                                    $('#activity').DataTable({
-                                                        "processing":true,
-                                                        "order": [[ 0, "desc" ]]
-                                                        ,
-                                                        data: <?php GetUserActivity($conn)?>,
-                                                        columns : [
-                                                            { 
-                                                                'data': 'id',
-                                                                'title':'ID'
-                                                            },
-                                                            { 
-                                                                'data': 'date',
-                                                                'title':'Date'
-                                                            },
-                                                            { 
-                                                                'data': 'user',
-                                                                'title': 'User' 
-                                                            },
-                                                            { 
-                                                                'data': 'ip',
-                                                                'title': 'Ip Address' 
-                                                            },
-                                                            { 
-                                                                'data': 'browser',
-                                                                'title': 'Browser' 
-                                                            }
-                                                        ]
-                                                    });
-                                                });
-                                            </script>
                                         </div>
                                     </div>
                                 </div>
@@ -105,3 +91,14 @@ if(Sessionset('admin') == false){
 	</div>
 
 	<?php include "include/script.php";?>
+	<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap4.min.js"></script>
+	<script>
+        $(document).ready(function() {
+            $('#activity').DataTable({
+                order: [[0, 'desc']],
+            });
+        } );
+    </script>

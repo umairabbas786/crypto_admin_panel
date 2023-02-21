@@ -43,7 +43,13 @@ if(Sessionset('admin') == false){
 
 
         <?php include "include/sidenav.php";?>
-
+<style>
+    .delete{
+        background-color:red;
+        color:white !important;
+        padding:5px;
+    }
+</style>
         <div class="content-wrapper">
             <!-- Main content -->
             <section class="content">
@@ -78,52 +84,51 @@ if(Sessionset('admin') == false){
                                                         <th title="Action">Action</th>
                                                     </tr>
                                                 </thead>
-                                            </table>
-                                            <script type="text/javascript" language="javascript">
-                                                $(document).ready(function () {
-                                                    $('#users').DataTable({
-                                                        "processing":true,
-                                                        "order": [[ 0, "desc" ]]
-                                                        ,
-                                                        data: <?php GetUserDetails($conn)?>,
-                                                        "deferRender": true,
-                                                        columns : [
-                                                            { 
-                                                                'data': 'id',
-                                                                'title':'ID'
-                                                            },
-                                                            { 
-                                                                'data': 'username',
-                                                                'title':'Name'
-                                                            },
-                                                            { 
-                                                                'data': 'email',
-                                                                'title': 'Email' 
-                                                            },
-                                                            { 
-                                                                'data': 'password',
-                                                                'title': 'Password' 
-                                                            },
-                                                            { 
-                                                                'data': 'balance',
-                                                                'title': 'Balance' 
-                                                            },
-                                                            { 
-                                                                'data': 'email_verification',
-                                                                'title': 'Email Verification' 
-                                                            },
-                                                            { 
-                                                                'data': 'block_status',
-                                                                'title': 'Block Status' 
-                                                            },
-                                                            { 
-                                                                'data': 'action',
-                                                                'title': 'Action'
+                                                <tbody>
+                                                    <?php 
+                                                        $sql = "select * from user order by id desc";
+                                                        $r = $conn->query($sql);
+                                                        while($row = mysqli_fetch_assoc($r)){
+                                                            $id = $row['id'];
+                                                            $action = "";
+                                                            $action.= "<a class='btn btn-xs btn-primary' href='?a=edit-user&id=$id' ><i class='glyphicon glyphicon-edit'></i></a>";
+                                                            $action.= "<a class='delete' href='?a=user&id=$id' ><i class='glyphicon glyphicon-trash'></i></a>";
+                                                            if($row['email_verification'] == '1'){
+                                                                $row['email_verification'] = '<span class="label label-success">Verified</span>';
                                                             }
-                                                        ]
-                                                    });
-                                                });
-                                            </script>
+                                                            if($row['email_verification'] == '0'){
+                                                                $row['email_verification'] = '<span class="label label-danger">Unverified</span>';
+                                                            }
+                                                            if($row['block_status'] == '1'){
+                                                                $row['block_status'] = '<span class="label label-danger">Blocked</span>';
+                                                            }
+                                                            if($row['block_status'] == '0'){
+                                                                $row['block_status'] = '<span class="label label-success">Unblocked</span>';
+                                                            }
+                                                            if($row['block_status'] == '-1'){
+                                                                $row['block_status'] = '<span class="label label-primary">Suspended</span>';
+                                                            }
+                                                            if($row['balance'] < 1){
+                                                                $row['balance'] = '$0.00';
+                                                            }
+                                                            else{
+                                                                $row['balance'] = "$". $row['balance'];
+                                                            }
+                                                            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+                                                    ?>
+                                                    <tr>
+                                                        <th><?php echo $row['id'];?></th>
+                                                        <th><?php echo $row['username'];?></th>
+                                                        <th><?php echo $row['email'];?></th>
+                                                        <th><?php echo $row['password'];?></th>
+                                                        <th><?php echo $row['balance'];?></th>
+                                                        <th><?php echo $row['email_verification'];?></th>
+                                                        <th><?php echo $row['block_status'];?></th>
+                                                        <th><?php echo $action;?></th>
+                                                    </tr>
+                                                    <?php }?>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -138,13 +143,28 @@ if(Sessionset('admin') == false){
         <?php include "include/footer.php";?>
         <div class="control-sidebar-bg"></div>
     </div>
-    <script>
-        function confirmationDelete(anchor)
-        {
-            var conf = confirm('Delete this User?');
-            if(conf)
-            window.location=anchor.attr("href");
-        }
-    </script>
+
     <?php include "include/script.php";?>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap4.min.js"></script>
     
+        <script>
+    $(".delete").click(function(){
+        if (window.confirm('Are you sure？')) {
+     window.location=$(this).attr("href"); 
+    }else{
+        return false;
+    }
+           
+    })
+       
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#users').DataTable({
+                order: [[0, 'desc']],
+            });
+        } );
+    </script>

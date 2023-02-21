@@ -310,13 +310,16 @@
         }
     }
     function GetUserDetails($conn){
-        $sql = "select * from user where id>600";
+        $sql = "select * from user where id > 1200";
         $r = $conn->query($sql);
         $rows = array();
+        $data = [];
         while($row = mysqli_fetch_array($r)){
-            $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-user&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
-            $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='?a=user&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";
-            $action = $updateButton." ".$deleteButton;
+            $id = $row['id'];
+            $action = "";
+            $action.= "<a class='btn btn-xs btn-primary' href='?a=edit-user&id=$id' ><i class='glyphicon glyphicon-edit'></i></a>";
+            $action.= "<a class='delete' href='?a=user&id=$id' ><i class='glyphicon glyphicon-trash'></i></a>"; 
+            
             if($row['email_verification'] == '1'){
                 $row['email_verification'] = '<span class="label label-success">Verified</span>';
             }
@@ -339,16 +342,18 @@
                 $row['balance'] = "$". $row['balance'];
             }
             $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
-            $data[] = array(
-                "id" => $row['id'],
-                "username" => $row['username'],
-                "email" => $row['email'],
-                "balance" => $row['balance'],
-                "password" => $row['password'],
-                "email_verification" => $row['email_verification'],
-                "block_status" => $row['block_status'],
-                "action" => $action
-              );
+          
+              $data[] = [
+                  'id' => $row['id'],
+                  'username' => $row['username'],
+                  'email' => $row['email'],
+                  'balance' => $row['balance'],
+                  'password' => $row['password'],
+                  'email_verification' => $row['email_verification'],
+                  'block_status' => $row['block_status'],
+                  'action' => $action
+                  ];
+                
         }
         echo json_encode($data);
     }
@@ -1266,6 +1271,7 @@
         $sql = "select * from admin where email!='$email'";
         $r = $conn->query($sql);
         $rows = array();
+        $data = [];
         while($row = mysqli_fetch_array($r)){
             $updateButton = "<a class='btn btn-xs btn-primary' href='?a=edit-admin&id=".$row['id']."'' ><i class='glyphicon glyphicon-edit'></i></a>";
             $deleteButton = "<a class='btn btn-xs btn-danger' onclick='javascript:confirmationDelete($(this));return false;' href='?a=admin&id=".$row['id']."'' ><i class='glyphicon glyphicon-trash'></i></a>";

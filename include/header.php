@@ -25,8 +25,13 @@ include "include/conn.php";
 	<!-- Skins -->
 	<link rel="stylesheet" type="text/css" href="dist/css/skins/_all-skins.min.css">
 	<!-- dataTables -->
-	<link rel="stylesheet" type="text/css" href="backend/DataTables_latest/DataTables-1.10.18/css/jquery.dataTables.min.css">
+	<?php if($_GET['a'] === 'user' || $_GET['a'] === 'activity' || $_GET['a'] === 'coolingperiod'){?>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap4.min.css">
+    <?php }else{?>
+    	<link rel="stylesheet" type="text/css" href="backend/DataTables_latest/DataTables-1.10.18/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" type="text/css" href="backend/DataTables_latest/Responsive-2.2.2/css/responsive.dataTables.min.css">
+    <?php }?>
 	<!-- wysihtml5 -->
 	<link rel="stylesheet" type="text/css" href="backend/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 	<!-- custom styles -->

@@ -65,29 +65,28 @@ if(Sessionset('admin') == false){
                                                         <th title="Status">Status</th>
                                                     </tr>
                                                 </thead>
-                                            </table>
-                                            <script type="text/javascript" language="javascript">
-                                                $(document).ready(function () {
-                                                    $('#cooling').DataTable({
-                                                        "processing":true,
-                                                        data: <?php GetCoolingPeriod($conn)?>,
-                                                        columns : [
-                                                            { 
-                                                                'data': 'id',
-                                                                'title':'ID'
-                                                            },
-                                                            { 
-                                                                'data': 'email',
-                                                                'title': 'Email' 
-                                                            },
-                                                            { 
-                                                                'data': 'status',
-                                                                'title': 'Status' 
+                                                <tbody>
+                                                    <?php 
+                                                        $sql = "select * from cooling_period";
+                                                        $r = $conn->query($sql);
+                                                        $rows = array();
+                                                        while($row = mysqli_fetch_array($r)){
+                                                            if($row['status'] == '1'){
+                                                                $row['status'] = '<div class="togglebutton"><label><input type="checkbox" name="status" value="'.$row['id'].'" checked=""><span class="toggle"></span></label></div>';
                                                             }
-                                                        ]
-                                                    });
-                                                });
-                                            </script>
+                                                            if($row['status'] == '0'){
+                                                                $row['status'] = '<div class="togglebutton"><label><input type="checkbox" name="statuss" value="'.$row['id'].'"><span class="toggle"></span></label></div>';
+                                                            }
+                                                            $row['email'] = '<a href=?a=edit-user&id='.GetUserIdWithEmail($row['email'],$conn).'>'.$row['email'].'</a>';
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $row['id'];?></td>
+                                                        <td><?php echo $row['email'];?></td>
+                                                        <td><?php echo $row['status'];?></td>
+                                                    </tr>
+                                                    <?php }?>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -134,4 +133,15 @@ if(Sessionset('admin') == false){
     
     </script>
     <?php include "include/script.php";?>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap4.min.js"></script>
+	<script>
+        $(document).ready(function() {
+            $('#cooling').DataTable({
+                order: [[0, 'desc']],
+            });
+        } );
+    </script>
     
